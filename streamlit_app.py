@@ -10,6 +10,11 @@ import base64
 import boto3
 from botocore.exceptions import ClientError
 
+# main page
+st.title("🎈 URI test app")
+st.write("upload your urine test strip for analysis")
+
+
 client = boto3.client(
     'bedrock-runtime',
     aws_access_key_id=st.secrets["AWS_ACCESS_KEY_ID"],
@@ -84,7 +89,7 @@ def make_payload(encoded_image):
 def get_LLM_analysis(image):
     print("converting image to b64")
     encoded_image = base64.b64encode(image.read()).decode()
-    encoded_image
+    # encoded_image
     st.write("converted")
     
     payload = make_payload(encoded_image)
@@ -121,9 +126,7 @@ def get_LLM_analysis(image):
     return answer
 
 
-# main page
-st.title("🎈 URI test app")
-st.write("upload your urine test strip for analysis")
+
 
 image=st.file_uploader("Upload your photo")
 if image is not None:
