@@ -88,7 +88,7 @@ def make_payload(image, encoded_image):
         }
     ]
     # Configure the inference parameters.
-    inf_params = {}
+    #inf_params = {"temperature": 0.5, "topP": 0.9}
 
     payload = {
         "messages": message_list,
@@ -116,15 +116,23 @@ def get_LLM_analysis(image):
 
     try:
         # Send the message to the model, using a basic inference configuration.
-        response = client.converse(
+        #response = client.converse(
+        response = client.invoke_model(    
             modelId=model_id,
-            messages=payload,
-            inferenceConfig={"temperature": 0.5, "topP": 0.9},
-        )
+            #messages=payload,
+            body=json.dumps(payload)
+        )            
+        #inferenceConfig={"temperature": 0.5, "topP": 0.9},
+        #)
 
         # Extract and print the response text.
-        response_text = response["output"]["message"]["content"][0]["text"]
-        st.write(response_text)
+        #response_text = response["output"]["message"]["content"][0]["text"]
+        model_response = json.loads(response["body"].read())
+        st.write("Model response:")
+        st.write(json.dumps(model_response, indent=2))
+        content_text = model_response["output"]["message"]["content"][0]["text"]
+        st.write(content_text)
+        
 
     except (ClientError, Exception) as e:
         st.write(f"ERROR: Can't invoke '{model_id}'. Reason: {e}")
