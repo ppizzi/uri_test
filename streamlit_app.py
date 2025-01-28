@@ -5,7 +5,7 @@
 import streamlit as st
 import json
 import base64
-import boto3
+#import boto3
 
 # model_id = "anthropic.claude-3-haiku-20240307-v1:0"
 
