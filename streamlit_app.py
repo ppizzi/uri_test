@@ -62,8 +62,8 @@ except (ClientError, Exception) as e:
 
 
 # functions
-def make_payload(encoded_image):
-    payload = {
+def make_payload(image, encoded_image):
+    /*payload = {
         "messages": [
             {
                 "role": "user",
@@ -84,7 +84,27 @@ def make_payload(encoded_image):
             }
         ],
         "system": [{"text" : "You are an expert medical doctor"}]
+    } */
+
+    payload = {
+        "messages":[
+            { 
+                "role": "user",
+                "content":[
+                    {
+                        "type": "image",
+                        "data": image
+                    },
+                    {
+                        "type": "text",
+                        "text": "Describe this image of a dipstick test and provide key paramenters. Is there any sign of an infection?."
+                    }
+                ]               
+            }                
+        ],
+        "system": [{"text" : "You are an expert medical doctor"}]
     }
+    
     return payload
 
 def get_LLM_analysis(image):
@@ -93,7 +113,7 @@ def get_LLM_analysis(image):
     # encoded_image
     st.write("converted")
     
-    payload = make_payload(encoded_image)
+    payload = make_payload(image, encoded_image)
     payload
     st.write("message ready")
 
