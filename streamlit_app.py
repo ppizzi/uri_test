@@ -70,12 +70,11 @@ def make_payload(image, encoded_image):
                 "content":[
                     {
                         "type": "image",
-                        "image": image
-                        #"source": {
-                        #    "type": "base64",
-                        #    "media_type": "image/jpeg",
-                        #    "data": encoded_image
-                        #}
+                        "source": {
+                            "type": "base64",
+                            "media_type": "application/json",
+                            "data": encoded_image
+                        }
                     },
                     {
                         "type": "text",
