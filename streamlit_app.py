@@ -77,8 +77,7 @@ def make_payload(encoded_image):
                     }
                 ]
             }
-        ],
-        "max_tokens": 1000        
+        ]       
     }
     return payload
 
