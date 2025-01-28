@@ -103,7 +103,7 @@ def get_LLM_analysis(image):
         response = client.converse(
             modelId=model_id,
             messages=payload,
-            inferenceConfig={"maxTokens": 512, "temperature": 0.5, "topP": 0.9},
+            inferenceConfig={"temperature": 0.5, "topP": 0.9},
         )
 
         # Extract and print the response text.
