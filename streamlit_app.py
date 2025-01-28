@@ -29,7 +29,7 @@ st.write(model_id)
 
 # ---test model connection and response ---
 # Start a conversation with the user message.
-user_message = "what is the maximum token size I can use?"
+user_message = "what parameters are typically included in a urine strip test?"
 conversation = [
     {
         "role": "user",
