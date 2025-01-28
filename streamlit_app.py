@@ -103,10 +103,11 @@ def get_LLM_analysis(image):
     encoded_image = base64.b64encode(image.read()).decode()
     
     with open("media/sunset.png", "rb") as image_file:
-    binary_data = image.read()
-    base_64_encoded_data = base64.b64encode(binary_data)
-    base64_string = base_64_encoded_data.decode("utf-8")
-    base64_string
+        binary_data = image.read()
+        base_64_encoded_data = base64.b64encode(binary_data)
+        base64_string = base_64_encoded_data.decode("utf-8")
+        base64_string
+    
     # encoded_image
     st.write("converted")
     
