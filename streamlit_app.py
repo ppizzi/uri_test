@@ -8,6 +8,7 @@ import streamlit as st
 import json
 import base64
 import boto3
+from botocore.exceptions import ClientError
 
 client = boto3.client(
     'bedrock-runtime',
