@@ -84,7 +84,9 @@ def make_payload(image, encoded_image):
             }                
         ]
     }
-    
+
+    # "system": [{"text" : "You are an expert medical doctor"}]  #< where should this go?
+
     return payload
 
 def get_LLM_analysis(image):
