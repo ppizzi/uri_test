@@ -15,6 +15,7 @@ import base64
 def get_LLM_analysis(image):
     print("converting image to b64")
     encoded_image = base64.b64encode(image.read()).decode()
+    encoded_image
     print("converted")
     return
 
