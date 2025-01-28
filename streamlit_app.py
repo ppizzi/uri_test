@@ -93,7 +93,7 @@ def make_payload(image, encoded_image):
     payload = {
         "messages": message_list,
         "system": system_list,
-        #"inferenceConfig": inf_params,
+        "inferenceConfig": inf_params,
     }
   
     return payload
@@ -101,10 +101,16 @@ def make_payload(image, encoded_image):
 def get_LLM_analysis(image):
     print("converting image to b64")
     encoded_image = base64.b64encode(image.read()).decode()
+    
+    with open("media/sunset.png", "rb") as image_file:
+    binary_data = image.read()
+    base_64_encoded_data = base64.b64encode(binary_data)
+    base64_string = base_64_encoded_data.decode("utf-8")
+    base64_string
     # encoded_image
     st.write("converted")
     
-    payload = make_payload(image, encoded_image)
+    payload = make_payload(image, base64_string)
     payload
     st.write("message ready")
 
