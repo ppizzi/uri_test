@@ -1,6 +1,7 @@
 # inspiration: 
 # https://github.com/aarushdixit889/photo-semantics-analyzer/blob/main/app.py
 # https://medium.com/@codingmatheus/sending-images-to-claude-3-using-amazon-bedrock-b588f104424f
+# https://docs.streamlit.io/develop/tutorials/chat-and-llm-apps/build-conversational-apps
 
 import streamlit as st
 import json
@@ -8,7 +9,13 @@ import base64
 import boto3
 
 # model_id = "anthropic.claude-3-haiku-20240307-v1:0"
-
+# bedrock_runtime_client = boto3.client(
+#    'bedrock-runtime',
+#    aws_access_key_id=AWS_ACCESS_KEY_ID,
+#    aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
+#    region_name=AWS_REGION
+#)
+#
 
 # functions
 
@@ -53,7 +60,7 @@ def get_LLM_analysis(image):
     # contentType="application/json",
     # body=json.dumps(payload)
     #)
-    
+
     return
 
 
