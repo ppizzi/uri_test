@@ -69,18 +69,15 @@ def make_payload(image, encoded_image):
                 "role": "user",
                 "content":[
                     {
-                        "type": "image",
-                        "source": {
-                            "type": "base64",
-                            "media_type": "application/json",
-                            "data": encoded_image
+                        "image": {
+                            "format": "jpg",
+                            "source": {"bytes": encoded_image}
                         }
                     },
                     {
-                        "type": "text",
                         "text": "Describe an image of a dipstick test and provide key paramenters. Is there any sign of an infection?."
                     }
-                ]               
+                ]              
             }                
         ]
     }
