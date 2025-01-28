@@ -3,6 +3,7 @@
 # https://medium.com/@codingmatheus/sending-images-to-claude-3-using-amazon-bedrock-b588f104424f
 # https://docs.streamlit.io/develop/tutorials/chat-and-llm-apps/build-conversational-apps
 # https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/python/example_code/bedrock-runtime/models/anthropic_claude/converse.py#L4
+# https://docs.aws.amazon.com/nova/latest/userguide/modalities-image-examples.html
 
 import streamlit as st
 import json
