@@ -64,14 +64,14 @@ except (ClientError, Exception) as e:
 
 # functions
 def make_payload(image, encoded_image):
-# Define your system prompt(s).
-system_list = [
-    {
-        "text": "You are an expert medical doctor. when the user provides you with an image, provide a short medical analysis and lookout for possible infection indicators."
-    }
-]
-# Define a "user" message including both the image and a text prompt.
-message_list = [
+    # Define your system prompt(s).
+    system_list = [
+        {
+            "text": "You are an expert medical doctor. when the user provides you with an image, provide a short medical analysis and lookout for possible infection indicators."
+        }
+    ]
+    # Define a "user" message including both the image and a text prompt.
+    message_list = [
         {
             "role": "user",
             "content": [
