@@ -15,7 +15,7 @@ bedrock_runtime_client = boto3.client(
     aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
     region_name=AWS_REGION
 )
-model_id = "anthropic.claude-3-haiku-20240307-v1:0"
+model_id = "anthropic.claude-3-5-haiku-20241022-v1:0"
 
 
 # Create a Bedrock Runtime client in the AWS Region you want to use.
