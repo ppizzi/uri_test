@@ -92,11 +92,30 @@ def get_LLM_analysis(image):
     payload
     st.write("message ready")
 
-    response = client.invoke_model(
-        modelId=model_id,
-        contentType="application/json",
-        body=json.dumps(payload)
+   # response = client.invoke_model(
+   #     modelId=model_id,
+   #     contentType="application/json",
+   #     body=json.dumps(payload)
+   #     )
+
+    try:
+        # Send the message to the model, using a basic inference configuration.
+        response = client.converse(
+            modelId=model_id,
+            messages=payload,
+            inferenceConfig={"maxTokens": 512, "temperature": 0.5, "topP": 0.9},
         )
+
+        # Extract and print the response text.
+        response_text = response["output"]["message"]["content"][0]["text"]
+        st.write(response_text)
+
+    except (ClientError, Exception) as e:
+        st.write(f"ERROR: Can't invoke '{model_id}'. Reason: {e}")
+        exit(1)
+
+
+    
 
     answer = response["output"]["message"]["content"][0]["text"]
     
