@@ -62,7 +62,7 @@ st.title("🎈 URI test app")
 st.write("upload your urine test strip for analysis")
 
 image=st.file_uploader("Upload your photo")
-if file is not None:
+if image is not None:
     st.sidebar.image(image)
     answer=get_LLM_analysis(image)
     # st.write(answer)
