@@ -11,9 +11,9 @@ import boto3
 
 bedrock_runtime_client = boto3.client(
     'bedrock-runtime',
-    aws_access_key_id=AWS_ACCESS_KEY_ID,
-    aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
-    region_name=AWS_REGION
+    aws_access_key_id=st.secrets["AWS_ACCESS_KEY_ID"],
+    aws_secret_access_key=st.secrets["AWS_SECRET_ACCESS_KEY"],
+    region_name=st.secrets["AWS_REGION"]
 )
 model_id = "anthropic.claude-3-5-haiku-20241022-v1:0"
 
