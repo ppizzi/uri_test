@@ -22,14 +22,14 @@ client = boto3.client(
     region_name=st.secrets["AWS_REGION"]
 )
 
-#Select model for inference
-#naming conventions: https://docs.aws.amazon.com/bedrock/latest/userguide/models-supported.html
-#model_id = "anthropic.claude-3-5-haiku-20241022-v1:0" #must use x-region inference??!!
+# Select model for inference
+# naming conventions: https://docs.aws.amazon.com/bedrock/latest/userguide/models-supported.html
+# model_id = "anthropic.claude-3-5-haiku-20241022-v1:0" #must use x-region inference??!!
 model_id = "amazon.nova-lite-v1:0"
 st.write(model_id)
 
 # Create a Bedrock Runtime client in the AWS Region you want to use.
-#client = boto3.client("bedrock-runtime", region_name="us-east-1")
+# client = boto3.client("bedrock-runtime", region_name="us-east-1")
 
 
 # ---test model connection and response ---
@@ -63,29 +63,6 @@ except (ClientError, Exception) as e:
 
 # functions
 def make_payload(image, encoded_image):
-    /*payload = {
-        "messages": [
-            {
-                "role": "user",
-                "content": [
-                    {
-                        "type": "image",
-                        "source": {
-                            "type": "base64",
-                            "media_type": "image/jpeg",
-                            "data": encoded_image
-                        }
-                    },
-                    {
-                        "type": "text",
-                        "text": "Describe this image."
-                    }
-                ]
-            }
-        ],
-        "system": [{"text" : "You are an expert medical doctor"}]
-    } */
-
     payload = {
         "messages":[
             { 
