@@ -9,7 +9,7 @@ import json
 import base64
 import boto3
 
-bedrock_runtime_client = boto3.client(
+client = boto3.client(
     'bedrock-runtime',
     aws_access_key_id=st.secrets["AWS_ACCESS_KEY_ID"],
     aws_secret_access_key=st.secrets["AWS_SECRET_ACCESS_KEY"],
@@ -20,6 +20,36 @@ model_id = "anthropic.claude-3-5-haiku-20241022-v1:0"
 
 # Create a Bedrock Runtime client in the AWS Region you want to use.
 #client = boto3.client("bedrock-runtime", region_name="us-east-1")
+
+
+# test model connection and response
+# Start a conversation with the user message.
+user_message = "Describe the purpose of a 'hello world' program in one line."
+conversation = [
+    {
+        "role": "user",
+        "content": [{"text": user_message}],
+    }
+]
+
+try:
+    # Send the message to the model, using a basic inference configuration.
+    response = client.converse(
+        modelId=model_id,
+        messages=conversation,
+        inferenceConfig={"maxTokens": 512, "temperature": 0.5, "topP": 0.9},
+    )
+
+    # Extract and print the response text.
+    response_text = response["output"]["message"]["content"][0]["text"]
+    print(response_text)
+
+except (ClientError, Exception) as e:
+    print(f"ERROR: Can't invoke '{model_id}'. Reason: {e}")
+    exit(1)
+
+
+
 
 # functions
 
@@ -39,12 +69,11 @@ def make_payload(encoded_image):
                     },
                     {
                         "type": "text",
-                        "text": "Explain this AWS architecture diagram."
+                        "text": "Describe this image."
                     }
                 ]
             }
         ],
-        #"anthropic_version": "bedrock-2023-05-31",
         "max_tokens": 500        
     }
     return payload
@@ -59,14 +88,15 @@ def get_LLM_analysis(image):
     payload
     st.write("message ready")
 
-    response = bedrock_runtime_client.invoke_model(
-        modelId=model_id,
-        contentType="application/json",
-        body=json.dumps(payload)
-        )
+    #response = client.invoke_model(
+    #    modelId=model_id,
+    #    contentType="application/json",
+    #    body=json.dumps(payload)
+    #    )
 
-    answer = response["output"]["message"]["content"][0]["text"]
-            
+    #answer = response["output"]["message"]["content"][0]["text"]
+    answer="empty answer by pietro"       
+    
     return answer
 
 
