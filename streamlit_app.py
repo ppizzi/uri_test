@@ -11,13 +11,12 @@ import base64
 # model_id = "anthropic.claude-3-haiku-20240307-v1:0"
 
 
-
 # functions
 def get_LLM_analysis(image):
     print("converting image to b64")
     encoded_image = base64.b64encode(image.read()).decode()
     print("converted")
-return
+    return
 
 st.title("🎈 URI test app")
 st.write(
