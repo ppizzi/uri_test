@@ -1,6 +1,14 @@
 import streamlit as st
 
-st.title("🎈 My new app")
+st.title("🎈 URI test app")
 st.write(
-    "Let's start building! For help and inspiration, head over to [docs.streamlit.io](https://docs.streamlit.io/)."
+    "upload your urine test strip for analysis"
 )
+
+
+
+file=st.file_uploader("Upload your photo")
+if file is not None:
+    st.sidebar.image(file)
+    # answer=get_semantics(file)
+    # st.write(answer)
