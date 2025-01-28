@@ -27,7 +27,7 @@ st.write(model_id)
 #client = boto3.client("bedrock-runtime", region_name="us-east-1")
 
 
-# test model connection and response
+# ---test model connection and response ---
 # Start a conversation with the user message.
 user_message = "Describe the purpose of a 'hello world' program in one line."
 conversation = [
@@ -53,11 +53,10 @@ except (ClientError, Exception) as e:
     st.write(f"ERROR: Can't invoke '{model_id}'. Reason: {e}")
     exit(1)
 
-
+#--- end of test section ---
 
 
 # functions
-
 def make_payload(encoded_image):
     payload = {
         "messages": [
@@ -93,14 +92,13 @@ def get_LLM_analysis(image):
     payload
     st.write("message ready")
 
-    #response = client.invoke_model(
-    #    modelId=model_id,
-    #    contentType="application/json",
-    #    body=json.dumps(payload)
-    #    )
+    response = client.invoke_model(
+        modelId=model_id,
+        contentType="application/json",
+        body=json.dumps(payload)
+        )
 
-    #answer = response["output"]["message"]["content"][0]["text"]
-    answer="empty answer by pietro"       
+    answer = response["output"]["message"]["content"][0]["text"]
     
     return answer
 
