@@ -29,7 +29,7 @@ st.write(model_id)
 
 # ---test model connection and response ---
 # Start a conversation with the user message.
-user_message = "Describe the purpose of a 'hello world' program in one line."
+user_message = "what is the maximum token size I can use?"
 conversation = [
     {
         "role": "user",
