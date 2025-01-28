@@ -17,7 +17,7 @@ client = boto3.client(
     region_name=st.secrets["AWS_REGION"]
 )
 #model_id = "anthropic.claude-3-5-haiku-20241022-v1:0"
-model_id"amazon.nova-lite-v1:0"
+model_id = "amazon.nova-lite-v1:0"
 
 
 # Create a Bedrock Runtime client in the AWS Region you want to use.
