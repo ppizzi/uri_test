@@ -82,8 +82,7 @@ def make_payload(image, encoded_image):
                     }
                 ]               
             }                
-        ],
-        "system": [{"text" : "You are an expert medical doctor"}]
+        ]
     }
     
     return payload
