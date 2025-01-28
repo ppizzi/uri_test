@@ -70,11 +70,15 @@ def make_payload(image, encoded_image):
                 "content":[
                     {
                         "type": "image",
-                        "data": image
+                        "source": {
+                            "type": "base64",
+                            "media_type": "image/jpeg",
+                            "data": encoded_image
+                        }
                     },
                     {
                         "type": "text",
-                        "text": "Describe this image of a dipstick test and provide key paramenters. Is there any sign of an infection?."
+                        "text": "Describe an image of a dipstick test and provide key paramenters. Is there any sign of an infection?."
                     }
                 ]               
             }                
