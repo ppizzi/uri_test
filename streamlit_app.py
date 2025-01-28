@@ -88,7 +88,7 @@ def make_payload(image, encoded_image):
         }
     ]
     # Configure the inference parameters.
-    #inf_params = {"temperature": 0.5, "topP": 0.9}
+    inf_params = {"temperature": 0.5, "topP": 0.9}
 
     payload = {
         "messages": message_list,
@@ -129,8 +129,7 @@ def get_LLM_analysis(image):
             #messages=payload,
             body=json.dumps(payload)
         )            
-        #inferenceConfig={"temperature": 0.5, "topP": 0.9},
-        #)
+
 
         # Extract and print the response text.
         #response_text = response["output"]["message"]["content"][0]["text"]
