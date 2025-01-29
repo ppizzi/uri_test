@@ -149,6 +149,7 @@ st.sidebar.image("uri_test_reference.jpg")
 
 up_image=st.file_uploader("Upload your photo", type=["jpg","png"])
 if up_image is not None:
+    st.write(type(image))
     img_holder = st.image(up_image)
     st.write("Make sure your photo is aligned in the same way as the reference of the test-kit:")
     mapping = {"0":"OK", "90": "90º :arrows_counterclockwise:", "270": "90º :arrows_clockwise:", "180":"180º"}
@@ -156,9 +157,9 @@ if up_image is not None:
     #st.write(rotate)
     save = st.button("Save")
     if save:
-        image = Image.open(up_image).rotate(int(rotate))
-        st.write(image)
-        #img_holder.image(image)
+        image = Image.open(up_image).rotate(int(rotate)).save("image.jpg")
+        img_holder.image(image)
+        
     launch_llm = st.button("Analyze")
     if launch_llm: 
         st.write(type(image))
