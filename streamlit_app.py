@@ -20,8 +20,8 @@ from botocore.exceptions import ClientError
 def encode_image(image):
     #print("converting image to b64")
     encoded_image = base64.b64encode(image.read()).decode("utf-8")
-    # encoded_image
-    # st.write("converted")
+    encoded_image
+    st.write("converted")
     
     return encoded_image
 
@@ -167,9 +167,8 @@ if up_image is not None:
     launch_llm = st.button("Analyze")
     if launch_llm: 
         st.write("we are here")
-        #st.write(type("img.jpg"))
         st.sidebar.image("img.jpg")
-        #encoded_image = encode_image(image)
+        encoded_image = encode_image("img.jpg")
         #st.write(encoded_image)
         #answer=get_LLM_analysis(encoded_image, output_language)
         #st.write(answer)
