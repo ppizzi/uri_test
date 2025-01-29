@@ -137,6 +137,9 @@ except (ClientError, Exception) as e:
 #--- end of legenda ---
 
 
+output_language = st.pills("Select your language:", ["English","Italian","Spanish"]) 
+st.write("You selected: ", output_language)
+
 image=st.file_uploader("Upload your photo")
 if image is not None:
     st.sidebar.image(image)
