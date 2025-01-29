@@ -70,10 +70,9 @@ def get_LLM_analysis(image):
         )            
 
         # Extract and print the response text.
-        #response_text = response["output"]["message"]["content"][0]["text"]
         model_response = json.loads(response["body"].read())
-        st.write("Model response:")
-        st.write(json.dumps(model_response, indent=2))
+        # st.write("Model response:")
+        # st.write(json.dumps(model_response, indent=2))
         content_text = model_response["output"]["message"]["content"][0]["text"]
         # st.write(content_text)   
 
