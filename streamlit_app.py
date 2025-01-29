@@ -10,6 +10,7 @@ import streamlit as st
 import json
 from PIL import Image
 import PIL
+import os
 import base64
 import boto3
 from botocore.exceptions import ClientError
@@ -167,8 +168,10 @@ if up_image is not None:
     launch_llm = st.button("Analyze")
     if launch_llm: 
         st.write("we are here")
-        st.sidebar.image("img.jpg")
-        encoded_image = encode_image("img.jpg")
+        image = os.open("img.jpg")
+        st.sidebar.image(image)
+        st.write("we are here")
+        encoded_image = encode_image(image)
         #st.write(encoded_image)
         #answer=get_LLM_analysis(encoded_image, output_language)
         #st.write(answer)
