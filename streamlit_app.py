@@ -149,7 +149,7 @@ st.write("You selected: ", output_language)
 
 st.sidebar.image("uri_test_reference.jpg")
 
-image=st.file_uploader("Upload your photo")
+image=st.file_uploader("Upload your photo", type=["jpg","png"])
 if image is not None:
     st.image(image)
     st.write("Make sure your photo is aligned in the same way as the reference of the test-kit:")
