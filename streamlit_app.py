@@ -159,7 +159,7 @@ if up_image is not None:
         image = Image.open(up_image).rotate(int(rotate))
         img_holder.image(image)
     launch_llm = st.button("Analyze")
-    if launch_llm and save: 
+    if launch_llm: 
         st.write(type(image))
         st.write(image)
         encoded_image = encode_image(image)
