@@ -156,8 +156,9 @@ if image is not None:
 st.write("Make sure your photo is aligned in the same way as the reference of the test-kit:")
 mapping = {"90": "90º :arrows_counterclockwise:", "270": "90º :arrows_clockwise:", "180":"180º"}
 rotate = st.radio("Rotate photo: ", ("90","270","180"), format_func = lambda x: mapping[x])
-#st.write(rotate)
-image = Image.open(image).rotate(rotate, PIL.Image.NEAREST, expand = 1)
+st.write(rotate)
+st.image(image).rotate(90)
+#image = Image.open(image).rotate(rotate, PIL.Image.NEAREST, expand = 1)
 
 launch_llm = st.button("Analyze")
 if launch_llm: 
