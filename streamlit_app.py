@@ -90,13 +90,6 @@ def get_LLM_analysis(image):
 st.title(":pill: Urine Test Analysis :it: ")
 st.write("Upload a photo of your urine test strip for analysis")
 
-client = boto3.client(
-    'bedrock-runtime',
-    aws_access_key_id=st.secrets["AWS_ACCESS_KEY_ID"],
-    aws_secret_access_key=st.secrets["AWS_SECRET_ACCESS_KEY"],
-    region_name=st.secrets["AWS_REGION"]
-)
-
 # Select model for inference
 # naming conventions: https://docs.aws.amazon.com/bedrock/latest/userguide/models-supported.html
 # model_id = "anthropic.claude-3-5-haiku-20241022-v1:0" #must use x-region inference??!!
@@ -106,6 +99,15 @@ st.write("\(note: this app uses the following LLM model: ", model_id, "\)" )
 
 # Create a Bedrock Runtime client in the AWS Region you want to use.
 # client = boto3.client("bedrock-runtime", region_name="us-east-1")
+client = boto3.client(
+    'bedrock-runtime',
+    aws_access_key_id=st.secrets["AWS_ACCESS_KEY_ID"],
+    aws_secret_access_key=st.secrets["AWS_SECRET_ACCESS_KEY"],
+    region_name=st.secrets["AWS_REGION"]
+)
+
+output_language = st.radio("Select your language:", ["English","Italian","Spanish"]) 
+st.write("You selected: ", output_language)
 
 
 # --- Legenda for Dypstick Test ---
@@ -137,8 +139,6 @@ except (ClientError, Exception) as e:
 #--- end of legenda ---
 
 
-output_language = st.pills("Select your language:", ["English","Italian","Spanish"]) 
-st.write("You selected: ", output_language)
 
 image=st.file_uploader("Upload your photo")
 if image is not None:
