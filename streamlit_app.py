@@ -168,7 +168,7 @@ if up_image is not None:
     launch_llm = st.button("Analyze")
     if launch_llm: 
         st.write("we are here")
-        image = os.open("img.jpg")
+        image = Image.open("img.jpg")
         st.sidebar.image(image)
         st.write("we are here")
         encoded_image = encode_image(image)
