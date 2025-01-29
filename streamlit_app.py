@@ -156,16 +156,15 @@ if up_image is not None:
     mapping = {"0":"OK", "90": "90º :arrows_counterclockwise:", "270": "90º :arrows_clockwise:", "180":"180º"}
     rotate = st.radio("Rotate photo: ", ("0","90","270","180"), format_func = lambda x: mapping[x])
     #st.write(rotate)
-    action = st.button("Save")
-    if action:
+    save = st.button("Save")
+    if save:
         image = Image.open(up_image).rotate(int(rotate))
         img_holder.image(image)
-
-launch_llm = st.button("Analyze")
-if launch_llm: 
-    answer=get_LLM_analysis(image, output_language)
-    launch_llm = 0 #reset the button
-    st.write(answer)
+        launch_llm = st.button("Analyze")
+        if launch_llm: 
+            answer=get_LLM_analysis(image, output_language)
+            launch_llm = 0 #reset the button
+            st.write(answer)
 
 
 
