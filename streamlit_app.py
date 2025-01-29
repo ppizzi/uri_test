@@ -138,12 +138,15 @@ client = boto3.client(
 output_language = st.radio("Select your language:", ["Spanish","Italian","English"]) 
 st.write("You selected: ", output_language)
 
+st.sidebar.image("uri_test_reference.jpg")
 
 image=st.file_uploader("Upload your photo")
 if image is not None:
     st.sidebar.image(image)
     answer=get_LLM_analysis(image, output_language)
     st.write(answer)
+
+
 
 
 #-- print legenda of typical dipstick test
