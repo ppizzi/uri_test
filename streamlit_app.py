@@ -48,7 +48,7 @@ def make_payload(encoded_image, language):
     # Define your system prompt(s).
     system_list = [
         {
-            "text": "You are an expert medical doctor. When the user provides you with an image of their urine test strip, provide a short medical analysis and lookout for possible infection indicators. Provide your answer in a concise format. Provide a short summary of your analysis first. Provide a table with the following columns: parameter name (declare the order with respect to the photo of the test stick); detected color; result of the analysis; indicator (green/yellow/red logos); details (explain your analysis). For parameters that are out of normal range, provide a short analysis after the table. Provide your answer in markdown format. Do not analyze images that are not containing a urine test strip. Always end the response with a disclaimer that this is not a medical advice."
+            "text": "You are an expert medical doctor. When the user provides you with an image of their urine test strip, provide a short medical analysis and lookout for possible infection indicators. Provide your answer in a concise format. Provide your answer in markdown format. Do not analyze images that are not containing a urine test strip. Always end the response with a disclaimer that this is not a medical advice."
         }
     ]
     # Define a "user" message including both the image and a text prompt.
@@ -63,7 +63,7 @@ def make_payload(encoded_image, language):
                     }
                 },
                 {
-                    "text": "Provide a description of this image only if it is a urine test stick. If it is anything else, respond that you cannot work with anything off-topic and ask to send a urine test stick. Please respond in the following language: " + language
+                    "text": "Analyze the image provided by the user. Provide a short summary of your analysis first. Then provide a table with the following columns: parameter name (declare the order with respect to the photo of the test stick); detected color; result of the analysis; indicator (green/yellow/red use markdown logos); details (explain your analysis). For parameters that are out of normal range, provide a short analysis after the table. Please respond in the following language: " + language
                 }
             ],
         }
