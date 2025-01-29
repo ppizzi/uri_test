@@ -151,7 +151,7 @@ if image is not None:
     st.sidebar.image(image)
 
 st.write("Make sure your photo is aligned in the same way as the reference of the test-kit:")
-rotate = st.radio("Rotate photo: ", ["90º :arrows_counterclockwise:","90º :arrows_clockwise:","180º"]
+rotate = st.radio("Rotate photo: ", ["90º :arrows_counterclockwise:","90º :arrows_clockwise:","180º"])
 
 
 launch_llm = st.button("Analyze")
