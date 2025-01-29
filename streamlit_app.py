@@ -157,12 +157,14 @@ if image is not None:
     rotate = st.radio("Rotate photo: ", ("90","270","180"), format_func = lambda x: mapping[x])
     st.write(rotate)
     image = Image.open(image).rotate(int(rotate), PIL.Image.NEAREST, expand = 1)
+    st.sidebar.image(image)
 
-launch_llm = st.button("Analyze")
-if launch_llm: 
-    answer=get_LLM_analysis(image, output_language)
-    launch_llm = 0 #reset the button
-    st.write(answer)
+    
+    launch_llm = st.button("Analyze")
+    if launch_llm: 
+        answer=get_LLM_analysis(image, output_language)
+        launch_llm = 0 #reset the button
+        st.write(answer)
 
 
 
