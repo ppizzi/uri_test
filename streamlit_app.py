@@ -87,7 +87,7 @@ def get_LLM_analysis(image):
 #--- end of function definition ---
 
 #--- main page ---
-st.title(":pill: Urine Test Analysis")
+st.title(":pill: Urine Test Analysis :it: ")
 st.write("Upload a photo of your urine test strip for analysis")
 
 client = boto3.client(
