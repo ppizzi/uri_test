@@ -157,7 +157,8 @@ if up_image is not None:
     save = st.button("Save")
     if save:
         image = Image.open(up_image).rotate(int(rotate))
-        img_holder.image(image)
+        st.write(image)
+        #img_holder.image(image)
     launch_llm = st.button("Analyze")
     if launch_llm: 
         st.write(type(image))
