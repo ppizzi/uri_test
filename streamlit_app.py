@@ -18,7 +18,7 @@ from botocore.exceptions import ClientError
 
 def print_legend(language):
     # Start a conversation with the user message.
-    user_message = "List in bullet points the parameters that are typically included in a urine strip test and how to interpret them. Use markdown as formatting language in your response. Please respond in the following language: ", language)
+    user_message = "List in bullet points the parameters that are typically included in a urine strip test and how to interpret them. Use markdown as formatting language in your response. Please respond in the following language: " + language
     st.write(user_message)
     conversation = [
         {
