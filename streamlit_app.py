@@ -12,8 +12,8 @@ import boto3
 from botocore.exceptions import ClientError
 
 # main page
-st.title("🎈 URI test app")
-st.write("upload your urine test strip for analysis")
+st.title(":pill: Urine Test Analysis")
+st.write("upload a photo of your urine test strip for analysis")
 
 
 client = boto3.client(
@@ -27,15 +27,16 @@ client = boto3.client(
 # naming conventions: https://docs.aws.amazon.com/bedrock/latest/userguide/models-supported.html
 # model_id = "anthropic.claude-3-5-haiku-20241022-v1:0" #must use x-region inference??!!
 model_id = "amazon.nova-lite-v1:0"
-st.write(model_id)
+st.write("This app uses the following LLM model: ", model_id)
+# st.write(model_id)
 
 # Create a Bedrock Runtime client in the AWS Region you want to use.
 # client = boto3.client("bedrock-runtime", region_name="us-east-1")
 
 
-# ---test model connection and response ---
+# --- Legenda for Dypstick Test ---
 # Start a conversation with the user message.
-user_message = "what parameters are typically included in a urine strip test?"
+user_message = "List in bullet points the parameters that are typically included in a urine strip test and how to interpret them. Use markdown as formatting language in your response."
 conversation = [
     {
         "role": "user",
@@ -59,7 +60,17 @@ except (ClientError, Exception) as e:
     st.write(f"ERROR: Can't invoke '{model_id}'. Reason: {e}")
     exit(1)
 
-#--- end of test section ---
+#--- end of legenda ---
+
+
+image=st.file_uploader("Upload your photo")
+if image is not None:
+    st.sidebar.image(image)
+    answer=get_LLM_analysis(image)
+    st.write(answer)
+
+# -- end main--
+
 
 
 # functions
@@ -67,7 +78,7 @@ def make_payload(image, encoded_image):
     # Define your system prompt(s).
     system_list = [
         {
-            "text": "You are an expert medical doctor. when the user provides you with an image, provide a short medical analysis and lookout for possible infection indicators."
+            "text": "You are an expert medical doctor. When the user provides you with an image of their urine test strip, provide a short medical analysis and lookout for possible infection indicators. Provide your answer in a concise format. Provide a short summary of your analysis first, and then use a table to provide more details for each parameter. Use traffic light logos (in markdown, red/yellow/green) to guide the patient. Provide your answer in markdown format. Do not analyze images that are not containing a urine test strip. Always end the response with a disclaimer that this is not a medical advice."
         }
     ]
     # Define a "user" message including both the image and a text prompt.
@@ -82,7 +93,7 @@ def make_payload(image, encoded_image):
                     }
                 },
                 {
-                    "text": "Provide a description of this image."
+                    "text": "Provide a description of this image only if it is a urine test stick. If it is anything else, respond that you cannot work with anything off-topic and ask to send a urine test stick."
                 }
             ],
         }
@@ -102,27 +113,20 @@ def get_LLM_analysis(image):
     print("converting image to b64")
     encoded_image = base64.b64encode(image.read()).decode("utf-8")
     # encoded_image
-    st.write("converted")
+    # st.write("converted")
     
     payload = make_payload(image, encoded_image)
-    payload
-    st.write("message ready")
-
-   # response = client.invoke_model(
-   #     modelId=model_id,
-   #     contentType="application/json",
-   #     body=json.dumps(payload)
-   #     )
+    # payload
+    # st.write("message ready")
 
     try:
         # Send the message to the model, using a basic inference configuration.
-        #response = client.converse(
+        # response = client.converse(
         response = client.invoke_model(    
             modelId=model_id,
             #messages=payload,
             body=json.dumps(payload)
         )            
-
 
         # Extract and print the response text.
         #response_text = response["output"]["message"]["content"][0]["text"]
@@ -130,25 +134,14 @@ def get_LLM_analysis(image):
         st.write("Model response:")
         st.write(json.dumps(model_response, indent=2))
         content_text = model_response["output"]["message"]["content"][0]["text"]
-        st.write(content_text)
-        
+        # st.write(content_text)   
 
     except (ClientError, Exception) as e:
         st.write(f"ERROR: Can't invoke '{model_id}'. Reason: {e}")
         exit(1)
 
-
-    
-
-    answer = response["output"]["message"]["content"][0]["text"]
+    answer = content_text
     
     return answer
 
 
-
-
-image=st.file_uploader("Upload your photo")
-if image is not None:
-    st.sidebar.image(image)
-    answer=get_LLM_analysis(image)
-    st.write(answer)
