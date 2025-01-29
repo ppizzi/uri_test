@@ -90,11 +90,9 @@ def make_payload(encoded_image, language):
   
     return payload
 
-def get_LLM_analysis(image, language):
-
-    encoded_image = encode_image(image)
+def get_LLM_analysis(imageb64, language):
     
-    payload = make_payload(encoded_image, language)
+    payload = make_payload(imageb64, language)
     # payload
     # st.write("message ready")
 
@@ -162,7 +160,8 @@ if up_image is not None:
         img_holder.image(image)
         launch_llm = st.button("Analyze")
         if launch_llm: 
-            answer=get_LLM_analysis(image, output_language)
+            encoded_image = encode_image(image)
+            answer=get_LLM_analysis(encoded_image, output_language)
             launch_llm = 0 #reset the button
             st.write(answer)
 
@@ -170,7 +169,7 @@ if up_image is not None:
 
 
 #-- print legenda of typical dipstick test
-print_legend(output_language)
+# print_legend(output_language)
 
 
 
