@@ -159,12 +159,9 @@ if up_image is not None:
     #st.write(rotate)
     save = st.button("Save")
     if save:
-        st.write("button pressed")
-        image = Image.open(up_image).rotate(int(rotate))#.save("image.jpg")
-        st.write("image rotated")
+        image = Image.open(up_image).rotate(int(rotate))
         img_holder.image(image)
         image.save("img.jpg")
-        st.write("image printed")
        
     launch_llm = st.button("Analyze")
     if launch_llm: 
@@ -173,11 +170,10 @@ if up_image is not None:
         with open("img.jpg", "rb") as f:
             image = f.read()
         st.sidebar.image(image)
-        #st.write("we are here 2")
         encoded_image = encode_image(image)
         #st.write(encoded_image)
-        #answer=get_LLM_analysis(encoded_image, output_language)
-        #st.write(answer)
+        answer=get_LLM_analysis(encoded_image, output_language)
+        st.write(answer)
 
 
 
