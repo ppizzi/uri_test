@@ -16,9 +16,10 @@ from botocore.exceptions import ClientError
 
 # -- functions --
 
-def print_legend():
+def print_legend(language):
     # Start a conversation with the user message.
-    user_message = "List in bullet points the parameters that are typically included in a urine strip test and how to interpret them. Use markdown as formatting language in your response."
+    user_message = "List in bullet points the parameters that are typically included in a urine strip test and how to interpret them. Use markdown as formatting language in your response. Please respond in the following language: ", language)
+    st.write(user_message)
     conversation = [
         {
         "role": "user",
@@ -141,16 +142,17 @@ output_language = st.radio("Select your language:", ["English","Italian","Spanis
 st.write("You selected: ", output_language)
 
 
-# --- Legenda for Dypstick Test ---
-#--- end of legenda ---
-
-
-
 image=st.file_uploader("Upload your photo")
 if image is not None:
     st.sidebar.image(image)
     answer=get_LLM_analysis(image)
     st.write(answer)
+
+
+#-- print legenda of typical dipstick test
+print_legend(output_language)
+
+
 
 # -- end main--
 
