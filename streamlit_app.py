@@ -14,6 +14,14 @@ from botocore.exceptions import ClientError
 
 # -- functions --
 
+def encode_image(image):
+    #print("converting image to b64")
+    encoded_image = base64.b64encode(image.read()).decode("utf-8")
+    # encoded_image
+    # st.write("converted")
+    
+    return encoded_image
+
 def print_legend(language):
     # Start a conversation with the user message.
     user_message = "List in bullet points the parameters that are typically included in a urine strip test and how to interpret them. Use markdown as formatting language in your response. Please respond in the following language: " + language
@@ -80,10 +88,8 @@ def make_payload(encoded_image, language):
     return payload
 
 def get_LLM_analysis(image, language):
-    print("converting image to b64")
-    encoded_image = base64.b64encode(image.read()).decode("utf-8")
-    # encoded_image
-    # st.write("converted")
+
+    encoded_image = encode_image(image)
     
     payload = make_payload(encoded_image, language)
     # payload
@@ -143,7 +149,11 @@ st.sidebar.image("uri_test_reference.jpg")
 image=st.file_uploader("Upload your photo")
 if image is not None:
     st.sidebar.image(image)
+
+launch_llm = st.button("Analyze")
+if launch_llm: 
     answer=get_LLM_analysis(image, output_language)
+    launch_llm = 0 #reset the button
     st.write(answer)
 
 
