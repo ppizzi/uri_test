@@ -151,7 +151,7 @@ st.sidebar.image("uri_test_reference.jpg")
 
 image=st.file_uploader("Upload your photo")
 if image is not None:
-    st.sidebar.image(image)
+    st.image(image)
     st.write("Make sure your photo is aligned in the same way as the reference of the test-kit:")
     mapping = {"0":"OK", "90": "90º :arrows_counterclockwise:", "270": "90º :arrows_clockwise:", "180":"180º"}
     rotate = st.radio("Rotate photo: ", ("0","90","270","180"), format_func = lambda x: mapping[x])
