@@ -1,4 +1,4 @@
-# inspiration: 
+    # inspiration: 
 # https://github.com/aarushdixit889/photo-semantics-analyzer/blob/main/app.py
 # https://medium.com/@codingmatheus/sending-images-to-claude-3-using-amazon-bedrock-b588f104424f
 # https://docs.streamlit.io/develop/tutorials/chat-and-llm-apps/build-conversational-apps
@@ -157,7 +157,7 @@ st.write("Make sure your photo is aligned in the same way as the reference of th
 mapping = {"90": "90º :arrows_counterclockwise:", "270": "90º :arrows_clockwise:", "180":"180º"}
 rotate = st.radio("Rotate photo: ", ("90","270","180"), format_func = lambda x: mapping[x])
 #st.write(rotate)
-image = image.rotate(90, PIL.Image.NEAREST, expand = 1)
+image = Image.open(image).rotate(rotate, PIL.Image.NEAREST, expand = 1)
 
 launch_llm = st.button("Analyze")
 if launch_llm: 
