@@ -160,6 +160,8 @@ if image is not None:
     if action:
         image = Image.open(image).rotate(int(rotate), PIL.Image.NEAREST, expand = 1)
         st.sidebar.image(image)
+        action=0
+        rotate=0
     
         launch_llm = st.button("Analyze")
         if launch_llm: 
