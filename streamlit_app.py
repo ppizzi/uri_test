@@ -20,10 +20,10 @@ from botocore.exceptions import ClientError
 
 def encode_image(image):
     #st.write("converting image to b64")
-    #encoded_image = base64.b64encode(image.read()).decode("utf-8")
+    #encoded_image = base64.b64encode(image.read()).decode("utf-8") #< works with uploaded file from st.upload_file, but not with an image from PIL or from os.open
     encoded_image = base64.b64encode(image).decode("utf-8")
-    encoded_image
-    st.write("converted")
+    #encoded_image
+    #st.write("converted")
     
     return encoded_image
 
@@ -168,12 +168,12 @@ if up_image is not None:
        
     launch_llm = st.button("Analyze")
     if launch_llm: 
-        st.write("we are here")
+        #st.write("we are here")
         #image = Image.open("img.jpg")
         with open("img.jpg", "rb") as f:
             image = f.read()
         st.sidebar.image(image)
-        st.write("we are here 2")
+        #st.write("we are here 2")
         encoded_image = encode_image(image)
         #st.write(encoded_image)
         #answer=get_LLM_analysis(encoded_image, output_language)
