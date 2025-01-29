@@ -19,7 +19,7 @@ from botocore.exceptions import ClientError
 def print_legend(language):
     # Start a conversation with the user message.
     user_message = "List in bullet points the parameters that are typically included in a urine strip test and how to interpret them. Use markdown as formatting language in your response. Please respond in the following language: " + language
-    st.write(user_message)
+    # st.write(user_message)
     conversation = [
         {
         "role": "user",
@@ -47,7 +47,7 @@ def print_legend(language):
     return
 
 
-def make_payload(image, encoded_image):
+def make_payload(encoded_image, language):
     # Define your system prompt(s).
     system_list = [
         {
@@ -66,7 +66,7 @@ def make_payload(image, encoded_image):
                     }
                 },
                 {
-                    "text": "Provide a description of this image only if it is a urine test stick. If it is anything else, respond that you cannot work with anything off-topic and ask to send a urine test stick."
+                    "text": "Provide a description of this image only if it is a urine test stick. If it is anything else, respond that you cannot work with anything off-topic and ask to send a urine test stick. Please respond in the following language: " + language
                 }
             ],
         }
@@ -82,13 +82,13 @@ def make_payload(image, encoded_image):
   
     return payload
 
-def get_LLM_analysis(image):
+def get_LLM_analysis(image, language):
     print("converting image to b64")
     encoded_image = base64.b64encode(image.read()).decode("utf-8")
     # encoded_image
     # st.write("converted")
     
-    payload = make_payload(image, encoded_image)
+    payload = make_payload(encoded_image, language)
     # payload
     # st.write("message ready")
 
@@ -145,7 +145,7 @@ st.write("You selected: ", output_language)
 image=st.file_uploader("Upload your photo")
 if image is not None:
     st.sidebar.image(image)
-    answer=get_LLM_analysis(image)
+    answer=get_LLM_analysis(image, output_language)
     st.write(answer)
 
 
