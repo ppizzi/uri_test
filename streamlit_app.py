@@ -14,7 +14,38 @@ from botocore.exceptions import ClientError
 
 
 
-# functions
+# -- functions --
+
+def print_legend():
+    # Start a conversation with the user message.
+    user_message = "List in bullet points the parameters that are typically included in a urine strip test and how to interpret them. Use markdown as formatting language in your response."
+    conversation = [
+        {
+        "role": "user",
+        "content": [{"text": user_message}],
+        }
+    ]
+
+    try:
+        # Send the message to the model, using a basic inference configuration.
+        response = client.converse(
+            modelId=model_id,
+            messages=conversation,
+            inferenceConfig={"maxTokens": 512, "temperature": 0.5, "topP": 0.9},
+        )
+
+        # Extract and print the response text.
+        response_text = response["output"]["message"]["content"][0]["text"]
+        st.write(response_text)
+
+    except (ClientError, Exception) as e:
+        st.write(f"ERROR: Can't invoke '{model_id}'. Reason: {e}")
+        exit(1)
+
+    st.write(response_text)
+    return
+
+
 def make_payload(image, encoded_image):
     # Define your system prompt(s).
     system_list = [
@@ -87,7 +118,7 @@ def get_LLM_analysis(image):
 #--- end of function definition ---
 
 #--- main page ---
-st.title(":pill: Urine Test Analysis :it: ")
+st.title(":pill: Urine Test Analysis")
 st.write("Upload a photo of your urine test strip for analysis")
 
 # Select model for inference
@@ -111,31 +142,6 @@ st.write("You selected: ", output_language)
 
 
 # --- Legenda for Dypstick Test ---
-# Start a conversation with the user message.
-user_message = "List in bullet points the parameters that are typically included in a urine strip test and how to interpret them. Use markdown as formatting language in your response."
-conversation = [
-    {
-        "role": "user",
-        "content": [{"text": user_message}],
-    }
-]
-
-try:
-    # Send the message to the model, using a basic inference configuration.
-    response = client.converse(
-        modelId=model_id,
-        messages=conversation,
-        inferenceConfig={"maxTokens": 512, "temperature": 0.5, "topP": 0.9},
-    )
-
-    # Extract and print the response text.
-    response_text = response["output"]["message"]["content"][0]["text"]
-    st.write(response_text)
-
-except (ClientError, Exception) as e:
-    st.write(f"ERROR: Can't invoke '{model_id}'. Reason: {e}")
-    exit(1)
-
 #--- end of legenda ---
 
 
