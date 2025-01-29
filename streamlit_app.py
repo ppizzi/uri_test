@@ -19,8 +19,9 @@ from botocore.exceptions import ClientError
 # -- functions --
 
 def encode_image(image):
-    #print("converting image to b64")
-    encoded_image = base64.b64encode(image.read()).decode("utf-8")
+    #st.write("converting image to b64")
+    #encoded_image = base64.b64encode(image.read()).decode("utf-8")
+    encoded_image = base64.b64encode(image).decode("utf-8")
     encoded_image
     st.write("converted")
     
