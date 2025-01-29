@@ -12,8 +12,6 @@ import boto3
 from botocore.exceptions import ClientError
 
 
-
-
 # -- functions --
 
 def print_legend(language):
@@ -43,7 +41,6 @@ def print_legend(language):
         st.write(f"ERROR: Can't invoke '{model_id}'. Reason: {e}")
         exit(1)
 
-    st.write(response_text)
     return
 
 
@@ -51,7 +48,7 @@ def make_payload(encoded_image, language):
     # Define your system prompt(s).
     system_list = [
         {
-            "text": "You are an expert medical doctor. When the user provides you with an image of their urine test strip, provide a short medical analysis and lookout for possible infection indicators. Provide your answer in a concise format. Provide a short summary of your analysis first, and then use a table to provide more details for each parameter. Use traffic light logos (in markdown, red/yellow/green) to guide the patient. Provide your answer in markdown format. Do not analyze images that are not containing a urine test strip. Always end the response with a disclaimer that this is not a medical advice."
+            "text": "You are an expert medical doctor. When the user provides you with an image of their urine test strip, provide a short medical analysis and lookout for possible infection indicators. Provide your answer in a concise format. Provide a short summary of your analysis first, and then use a table to provide more details for each parameter, and include a column that states the color you detected on the test strip. Use traffic light logos (red/yellow/green) to guide the patient. Provide your answer in markdown format. Do not analyze images that are not containing a urine test strip. Always end the response with a disclaimer that this is not a medical advice."
         }
     ]
     # Define a "user" message including both the image and a text prompt.
@@ -138,7 +135,7 @@ client = boto3.client(
     region_name=st.secrets["AWS_REGION"]
 )
 
-output_language = st.radio("Select your language:", ["English","Italian","Spanish"]) 
+output_language = st.radio("Select your language:", ["Spanish","Italian","English"]) 
 st.write("You selected: ", output_language)
 
 
