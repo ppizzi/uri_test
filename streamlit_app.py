@@ -63,7 +63,7 @@ def make_payload(encoded_image, language):
                     }
                 },
                 {
-                    "text": "Analyze the image provided by the user, pay close attention to the colors of the indicators on the test strip and identify them precisely. Provide a short summary of your analysis first. Then provide a table with the following columns: parameter name (declare the order with respect to the photo of the test stick); detected color; result of the analysis; details (explain your analysis); indicator (green/yellow/red use markdown logos). For parameters that are out of normal range, provide a short analysis after the table. Please respond in the following language: " + language
+                    "text": "Analyze the image provided by the user, pay close attention to the colors of the indicators on the test strip and identify them precisely. Provide a short summary of your analysis first. Then provide a table where the rows are the test parameters in the same order as the picture provided, and the columns are the following: parameter name; detected color; result of the analysis; details (explain your analysis); indicator (green/yellow/red). For parameters that are out of normal range, provide a short analysis after the table. Please respond in the following language: " + language
                 }
             ],
         }
