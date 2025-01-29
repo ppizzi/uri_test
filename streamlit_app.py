@@ -160,9 +160,8 @@ if up_image is not None:
     if save:
         image = Image.open(up_image).rotate(int(rotate))
         img_holder.image(image)
-    
         launch_llm = st.button("Analyze")
-        if save and launch_llm: 
+        if launch_llm: 
             answer=get_LLM_analysis(image, output_language)
             launch_llm = 0 #reset the button
             st.write(answer)
