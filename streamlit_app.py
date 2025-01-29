@@ -11,65 +11,6 @@ import base64
 import boto3
 from botocore.exceptions import ClientError
 
-# main page
-st.title(":pill: Urine Test Analysis")
-st.write("upload a photo of your urine test strip for analysis")
-
-
-client = boto3.client(
-    'bedrock-runtime',
-    aws_access_key_id=st.secrets["AWS_ACCESS_KEY_ID"],
-    aws_secret_access_key=st.secrets["AWS_SECRET_ACCESS_KEY"],
-    region_name=st.secrets["AWS_REGION"]
-)
-
-# Select model for inference
-# naming conventions: https://docs.aws.amazon.com/bedrock/latest/userguide/models-supported.html
-# model_id = "anthropic.claude-3-5-haiku-20241022-v1:0" #must use x-region inference??!!
-model_id = "amazon.nova-lite-v1:0"
-st.write("This app uses the following LLM model: ", model_id)
-# st.write(model_id)
-
-# Create a Bedrock Runtime client in the AWS Region you want to use.
-# client = boto3.client("bedrock-runtime", region_name="us-east-1")
-
-
-# --- Legenda for Dypstick Test ---
-# Start a conversation with the user message.
-user_message = "List in bullet points the parameters that are typically included in a urine strip test and how to interpret them. Use markdown as formatting language in your response."
-conversation = [
-    {
-        "role": "user",
-        "content": [{"text": user_message}],
-    }
-]
-
-try:
-    # Send the message to the model, using a basic inference configuration.
-    response = client.converse(
-        modelId=model_id,
-        messages=conversation,
-        inferenceConfig={"maxTokens": 512, "temperature": 0.5, "topP": 0.9},
-    )
-
-    # Extract and print the response text.
-    response_text = response["output"]["message"]["content"][0]["text"]
-    st.write(response_text)
-
-except (ClientError, Exception) as e:
-    st.write(f"ERROR: Can't invoke '{model_id}'. Reason: {e}")
-    exit(1)
-
-#--- end of legenda ---
-
-
-image=st.file_uploader("Upload your photo")
-if image is not None:
-    st.sidebar.image(image)
-    answer=get_LLM_analysis(image)
-    st.write(answer)
-
-# -- end main--
 
 
 
@@ -143,5 +84,66 @@ def get_LLM_analysis(image):
     answer = content_text
     
     return answer
+
+#--- end of function definition ---
+
+#--- main page ---
+st.title(":pill: Urine Test Analysis")
+st.write("Upload a photo of your urine test strip for analysis")
+
+client = boto3.client(
+    'bedrock-runtime',
+    aws_access_key_id=st.secrets["AWS_ACCESS_KEY_ID"],
+    aws_secret_access_key=st.secrets["AWS_SECRET_ACCESS_KEY"],
+    region_name=st.secrets["AWS_REGION"]
+)
+
+# Select model for inference
+# naming conventions: https://docs.aws.amazon.com/bedrock/latest/userguide/models-supported.html
+# model_id = "anthropic.claude-3-5-haiku-20241022-v1:0" #must use x-region inference??!!
+model_id = "amazon.nova-lite-v1:0"
+st.write("\(note: this app uses the following LLM model: ", model_id, "\)" )
+# st.write(model_id)
+
+# Create a Bedrock Runtime client in the AWS Region you want to use.
+# client = boto3.client("bedrock-runtime", region_name="us-east-1")
+
+
+# --- Legenda for Dypstick Test ---
+# Start a conversation with the user message.
+user_message = "List in bullet points the parameters that are typically included in a urine strip test and how to interpret them. Use markdown as formatting language in your response."
+conversation = [
+    {
+        "role": "user",
+        "content": [{"text": user_message}],
+    }
+]
+
+try:
+    # Send the message to the model, using a basic inference configuration.
+    response = client.converse(
+        modelId=model_id,
+        messages=conversation,
+        inferenceConfig={"maxTokens": 512, "temperature": 0.5, "topP": 0.9},
+    )
+
+    # Extract and print the response text.
+    response_text = response["output"]["message"]["content"][0]["text"]
+    st.write(response_text)
+
+except (ClientError, Exception) as e:
+    st.write(f"ERROR: Can't invoke '{model_id}'. Reason: {e}")
+    exit(1)
+
+#--- end of legenda ---
+
+
+image=st.file_uploader("Upload your photo")
+if image is not None:
+    st.sidebar.image(image)
+    answer=get_LLM_analysis(image)
+    st.write(answer)
+
+# -- end main--
 
 
