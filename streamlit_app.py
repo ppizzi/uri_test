@@ -168,7 +168,7 @@ if up_image is not None:
     if launch_llm: 
         st.write("we are here")
         #st.write(type("img.jpg"))
-        #st.image("img.jpg")
+        st.sidebar.image("img.jpg")
         #encoded_image = encode_image(image)
         #st.write(encoded_image)
         #answer=get_LLM_analysis(encoded_image, output_language)
