@@ -30,7 +30,7 @@ def print_legend(language):
         response = client.converse(
             modelId=model_id,
             messages=conversation,
-            inferenceConfig={"maxTokens": 512, "temperature": 0.5, "topP": 0.9},
+            inferenceConfig={"temperature": 0.5, "topP": 0.9},
         )
 
         # Extract and print the response text.
@@ -63,7 +63,7 @@ def make_payload(encoded_image, language):
                     }
                 },
                 {
-                    "text": "Analyze the image provided by the user. Provide a short summary of your analysis first. Then provide a table with the following columns: parameter name (declare the order with respect to the photo of the test stick); detected color; result of the analysis; indicator (green/yellow/red use markdown logos); details (explain your analysis). For parameters that are out of normal range, provide a short analysis after the table. Please respond in the following language: " + language
+                    "text": "Analyze the image provided by the user. Provide a short summary of your analysis first. Then provide a table with the following columns: parameter name (declare the order with respect to the photo of the test stick); detected color; result of the analysis; details (explain your analysis); indicator (green/yellow/red use markdown logos). For parameters that are out of normal range, provide a short analysis after the table. Please respond in the following language: " + language
                 }
             ],
         }
