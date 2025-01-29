@@ -158,7 +158,7 @@ if image is not None:
     #st.write(rotate)
     action = st.button("Save")
     if action:
-        image = Image.open(image).rotate(int(rotate), PIL.Image.NEAREST, expand = 1)
+        image = Image.open(image).rotate(int(rotate))
         st.sidebar.image(image)
 
 launch_llm = st.button("Analyze")
