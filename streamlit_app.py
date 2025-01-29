@@ -169,9 +169,11 @@ if up_image is not None:
     launch_llm = st.button("Analyze")
     if launch_llm: 
         st.write("we are here")
-        image = Image.open("img.jpg")
+        #image = Image.open("img.jpg")
+        with open("img.jpg", "rb") as f:
+            image = f.read()
         st.sidebar.image(image)
-        st.write("we are here")
+        st.write("we are here 2")
         encoded_image = encode_image(image)
         #st.write(encoded_image)
         #answer=get_LLM_analysis(encoded_image, output_language)
