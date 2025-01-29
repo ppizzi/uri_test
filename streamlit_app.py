@@ -160,12 +160,12 @@ if up_image is not None:
         img_holder.image(image)
     launch_llm = st.button("Analyze")
     if launch_llm and save: 
-            st.write(image)
-            encoded_image = encode_image(image)
-            st.write(encoded_image)
-            answer=get_LLM_analysis(encoded_image, output_language)
-            launch_llm = 0 #reset the button
-            st.write(answer)
+        st.write(type(image))
+        st.write(image)
+        encoded_image = encode_image(image)
+        st.write(encoded_image)
+        answer=get_LLM_analysis(encoded_image, output_language)
+        st.write(answer)
 
 
 
