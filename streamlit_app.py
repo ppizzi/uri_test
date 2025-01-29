@@ -4,9 +4,12 @@
 # https://docs.streamlit.io/develop/tutorials/chat-and-llm-apps/build-conversational-apps
 # https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/python/example_code/bedrock-runtime/models/anthropic_claude/converse.py#L4
 # https://docs.aws.amazon.com/nova/latest/userguide/modalities-image-examples.html
+# https://discuss.streamlit.io/t/unique-key-for-every-items-in-radio-button/20654/4
 
 import streamlit as st
 import json
+from PIL import Image
+import PIL
 import base64
 import boto3
 from botocore.exceptions import ClientError
@@ -151,9 +154,10 @@ if image is not None:
     st.sidebar.image(image)
 
 st.write("Make sure your photo is aligned in the same way as the reference of the test-kit:")
-mapping = {"90": "90º :arrows_counterclockwise:", "270": "90º :arrows_clockwise", "180":"180º"}
+mapping = {"90": "90º :arrows_counterclockwise:", "270": "90º :arrows_clockwise:", "180":"180º"}
 rotate = st.radio("Rotate photo: ", ("90","270","180"), format_func = lambda x: mapping[x])
-st.write(rotate)
+#st.write(rotate)
+image = image.rotate(90, PIL.Image.NEAREST, expand = 1)
 
 launch_llm = st.button("Analyze")
 if launch_llm: 
