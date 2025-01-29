@@ -162,8 +162,8 @@ if up_image is not None:
         
     launch_llm = st.button("Analyze")
     if launch_llm: 
-        st.write(type(image))
-        st.write(image)
+        st.write(type("image.jpg"))
+        st.write("image.jpg")
         encoded_image = encode_image(image)
         st.write(encoded_image)
         answer=get_LLM_analysis(encoded_image, output_language)
