@@ -187,7 +187,8 @@ if up_image is not None:
         img_holder.image(rot_image)
         rot_image.save("img.jpg")
     else:
-        up_image.save("img.jpg")
+        rot_image = Image.open(up_image)
+        rot_image.save("img.jpg")
 
 #--consult llm
 launch_llm = st.button("Analyze")
