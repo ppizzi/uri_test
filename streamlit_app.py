@@ -78,27 +78,19 @@ def get_LLM_analysis(model_id, refimageb64, imageb64, language):
     with open("img.jpeg", "rb") as f:
         image = f.read()
 
-        message_list = [
+  
+    try:
+        user_message =  "tell me something nice"
+        conversation = [
             {
-                "role": "user",
-                "content": [
-                     {
-                        "text": "You are going to analyze a patient's urine test by confronting a reference image from the test kit instructions with the used test from the patient. The first image shows a urine test reference. You can identify the order of the tested parameters on the test strips and the normal results."
-                    },
-                ],
+                "role":"user", 
+                "content":[{"text":user_message}]
             }
         ]
-    
-
-
-
-    try:
-        conversation = [{"role":"user", "content":[{"text":"tell me something nice"}] }]
+        
         response = client.converse(
             modelId=model_id,
             messages=conversation,
-            #inferenceConfig={"maxTokens": 1000, "temperature": 0.5, "topP": 0.9},
-            #system=system_list
         )  
 
         # Extract and print the response text.
