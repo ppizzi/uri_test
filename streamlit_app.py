@@ -8,6 +8,8 @@
 # https://stackoverflow.com/questions/3715493/encoding-an-image-file-with-base64
 # https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_ImageSource.html
 # https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Message.html
+# https://docs.anthropic.com/en/docs/build-with-claude/vision
+
 
 import streamlit as st
 import json
@@ -44,7 +46,7 @@ def print_legend(language):
     try:
         # Send the message to the model, using a basic inference configuration.
         response = client.converse(
-            modelId=model_id,
+            modelId=model_id2,
             messages=conversation,
             inferenceConfig={"temperature": 0.5, "topP": 0.9},
         )
@@ -95,6 +97,7 @@ def make_payload(encoded_image, language):
   
     return payload
 
+
 def get_LLM_analysis(imageb64, language):
     
     payload = make_payload(imageb64, language)
@@ -133,7 +136,7 @@ st.write("Upload a photo of your urine test strip for analysis")
 
 # Select model for inference
 # naming conventions: https://docs.aws.amazon.com/bedrock/latest/userguide/models-supported.html
-# model_id = "us.anthropic.claude-3-5-sonnet-20240620-v1:0" #must use x-region inference??!! --> add the us or eu prefix to the model?
+model_id2 = "us.anthropic.claude-3-5-sonnet-20240620-v1:0" #must use x-region inference??!! --> add the us or eu prefix to the model?
 model_id = "amazon.nova-lite-v1:0"
 st.write("\(note: this app uses the following LLM model: ", model_id, "\)" )
 # st.write(model_id)
@@ -166,10 +169,10 @@ if up_image is not None:
         img_holder.image(image)
         image.save("img.jpg")
        
-    launch_llm = st.button("Analyze")
-    if launch_llm: 
-        with open("img.jpg", "rb") as f:
-            image = f.read()
+launch_llm = st.button("Analyze")
+if launch_llm: 
+     with open("img.jpg", "rb") as f:
+        image = f.read()
         st.sidebar.image(image)
         st.image(image)
         encoded_image = encode_image(image)
@@ -178,11 +181,8 @@ if up_image is not None:
         st.write(answer)
 
 
-
-
 #-- print legenda of typical dipstick test
 # print_legend(output_language)
-
 
 
 # -- end main--
