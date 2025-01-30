@@ -72,26 +72,25 @@ def get_LLM_analysis(model_id, refimageb64, imageb64, language):
         }
     ]
    
-    # Define a "user" message including both the image and a text prompt.
     with open("uri_test_reference.jpeg", "rb") as f:
         ref_image = f.read()
     with open("img.jpeg", "rb") as f:
         image = f.read()
 
-  
-    try:
-        user_message =  "tell me something nice"
-        conversation = [
+       user_message = "tell me something nice my doctor would say"
+       conversation = [
             {
-                "role":"user", 
-                "content":[{"text":user_message}]
+            "role": "user",
+            "content": [{"text": user_message}],
             }
         ]
-        
+
+        try:
+        # Send the message to the model, using a basic inference configuration.
         response = client.converse(
             modelId=model_id,
-            messages=conversation,
-        )  
+            messages=conversation
+        )
 
         # Extract and print the response text.
         model_response = json.loads(response["body"].read())
