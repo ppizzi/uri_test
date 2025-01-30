@@ -64,29 +64,20 @@ def print_legend(language):
 
     return
 
-
 def get_LLM_analysis(model_id, refimageb64, imageb64, language):
-    
     with open("uri_test_reference.jpeg", "rb") as f:
         ref_image = f.read()
     with open("img.jpeg", "rb") as p:
         image = p.read()
 
     user_message = "tell me something nice my doctor would say"
-    conversation = [
-        {
-            "role": "user",
-            "content": [
-                {"text": user_message}
-            ],
-        }
-    ]
-
+    conversation = [{"role": "user", "content": [{"text": user_message}]}]
+    
     try:
         # Send the message to the model, using a basic inference configuration.
         response = client.converse(
             modelId=model_id,
-            messages=conversation
+            messages=conversation,
         )
 
         # Extract and print the response text.
