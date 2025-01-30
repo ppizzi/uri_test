@@ -179,13 +179,15 @@ up_image=st.file_uploader("Upload your photo", type=["jpg","png"])
 if up_image is not None:
     img_holder = st.image(up_image)
     st.write("Make sure your photo is aligned in the same way as the reference of the test-kit:")
-    mapping = {"0":"OK", "90": "90º :arrows_counterclockwise:", "270": "90º :arrows_clockwise:", "180":"180º"}
-    rotate = st.radio("Rotate photo: ", ("0","90","270","180"), format_func = lambda x: mapping[x])
-    save = st.button("Save")
-    if save:
-        image = Image.open(up_image).rotate(int(rotate))
-        img_holder.image(image)
-        image.save("img.jpg")
+    mapping = {"90": "90º :arrows_counterclockwise:", "270": "90º :arrows_clockwise:", "180":"180º"}
+    rotate = st.radio("Rotate photo: ", ("90","270","180"), format_func = lambda x: mapping[x])
+    rot_bt = st.button("Save")
+    if rot_bt:
+        rot_image = Image.open(up_image).rotate(int(rotate))
+        img_holder.image(rot_image)
+        rot_image.save("img.jpg")
+    else:
+        up_image.save("img.jpg")
 
 #--consult llm
 launch_llm = st.button("Analyze")
