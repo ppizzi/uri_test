@@ -76,8 +76,7 @@ def get_LLM_analysis(model_id, refimageb64, imageb64, language):
     with open("img.jpeg", "rb") as f:
         image = f.read()
 
-    
-    message_list = [
+        message_list = [
         {
             "role": "user",
             "content": [
@@ -85,22 +84,8 @@ def get_LLM_analysis(model_id, refimageb64, imageb64, language):
                     "text": "You are going to analyze a patient's urine test by confronting a reference image from the test kit instructions with the used test from the patient. The first image shows a urine test reference. You can identify the order of the tested parameters on the test strips and the normal results."
                 },
                 {
-                    "image": {
-                        "format": "jpeg",
-                        #"source": {"bytes": refimageb64},
-                        "source": {"bytes": ref_image},
-                    }
-                },
-                {
                     "text": "This second image shows the urine test strip from the patient. From this image, identify each parameter by comparing it with the reference image. For each parameter, identify accurately the color of the test result."
                 },
-                {
-                    "image": {
-                        "format": "jpeg",
-                        #"source": {"bytes": imageb64},
-                        "source": {"bytes": image},
-                    }
-                }, 
                 {
                     "text": "Based on the two pictures provided, respond with a three sentence summary of your analysis. Then provide a table with each parameter (rows) in the same order of the test strip. These are the columns that must be included in the table: Parameter name; Normal reference color (describe the color of the reference kit); Test color (describe the color you see in the dypstic test) ; Comment; trafficlight(:red_circle: or :white_check_mark:). After the table, if any parameter is not normal, provide a description and possible causes analysis."
                 }
@@ -108,20 +93,10 @@ def get_LLM_analysis(model_id, refimageb64, imageb64, language):
         }
     ]
     
-    # Configure the inference parameters.
-    #inf_params = {"temperature": 0.5, "topP": 0.9}
+
+
 
     try:
-        #payload = {
-        #    "messages": message_list,
-        #    "system": system_list
-        #}
-        ## Send the message to the model, using a basic inference configuration.
-        #response = client.invoke_model(    
-        #    modelId=model_id,
-        #    body=json.dumps(payload)
-        #)     
-        
         response = client.converse(
             modelId=model_id,
             messages=message_list,
