@@ -124,7 +124,7 @@ def get_LLM_analysis(model_id, refimageb64, imageb64, language):
         #)     
         response = client.converse(
             modelId=model_id,
-            messages=payload.messages,
+            messages=payload["messages"],
        )  
 
         # Extract and print the response text.
