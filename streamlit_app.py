@@ -64,7 +64,7 @@ def print_legend(language):
     return
 
 
-def make_payload(encoded_image, language):
+def make_payload(encoded_ref_image, encoded_image, language):
     # Define your system prompt(s).
     system_list = [
         {
@@ -100,9 +100,9 @@ def make_payload(encoded_image, language):
     return payload
 
 
-def get_LLM_analysis(imageb64, language):
+def get_LLM_analysis(refimageb64, imageb64, language):
     
-    payload = make_payload(imageb64, language)
+    payload = make_payload(refimageb64, imageb64, language)
     # payload
     # st.write("message ready")
 
@@ -132,11 +132,12 @@ def get_LLM_analysis(imageb64, language):
 
 #--- end of function definition ---
 
-#--- main page ---
+
+####--- main page ---###
 st.title(":pill: Urine Test Analysis")
 st.write("Upload a photo of your urine test strip for analysis")
 
-# Select model for inference
+#--Select model for inference
 # naming conventions: https://docs.aws.amazon.com/bedrock/latest/userguide/models-supported.html
 model_id2 = "us.anthropic.claude-3-5-sonnet-20240620-v1:0" #must use x-region inference??!! --> add the us or eu prefix to the model?
 model_id = "amazon.nova-lite-v1:0"
@@ -159,7 +160,6 @@ st.sidebar.image("uri_test_reference.jpg")
 with open("uri_test_reference.jpg", "rb") as f:
         ref_image = f.read()
 encoded_ref_image = encode_image(ref_image)
-st.write(encoded_ref_image)
 
 #--upload test strip photo, rotate it, save it
 up_image=st.file_uploader("Upload your photo", type=["jpg","png"])
@@ -183,7 +183,7 @@ if launch_llm:
     st.sidebar.image(image)
     encoded_image = encode_image(image)
     #--launch llm
-    answer=get_LLM_analysis(encoded_image, output_language)
+    answer=get_LLM_analysis(encoded_ref_image, encoded_image, output_language)
     st.write(answer)
 
 
