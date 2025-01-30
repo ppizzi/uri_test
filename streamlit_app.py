@@ -65,27 +65,20 @@ def print_legend(language):
 
 def get_LLM_analysis(model_id, refimageb64, imageb64, language):
     
-    # Define your system prompt(s).
-    system_list = [
-        {
-            "text": "You are an expert medical doctor. When the user provides you with an image of their urine test strip, analyze carefully the color of the various indicators on the test and compare it to the testkit reference. Then provide a short medical analysis and lookout for possible infection indicators. Provide your answer in a concise format. Provide your answer in markdown format. Do not analyze images that are not containing a urine test strip. Always end the response with a disclaimer that this is not a medical advice. Please respond in the following language: " + language  
-        }
-    ]
-   
     with open("uri_test_reference.jpeg", "rb") as f:
         ref_image = f.read()
     with open("img.jpeg", "rb") as f:
         image = f.read()
 
-       user_message = "tell me something nice my doctor would say"
-       conversation = [
+    user_message = "tell me something nice my doctor would say"
+    conversation = [
             {
             "role": "user",
             "content": [{"text": user_message}],
             }
         ]
 
-        try:
+    try:
         # Send the message to the model, using a basic inference configuration.
         response = client.converse(
             modelId=model_id,
