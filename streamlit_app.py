@@ -64,12 +64,14 @@ def print_legend(language):
 
 
 def get_LLM_analysis(model_id, refimageb64, imageb64, language):
+    
     # Define your system prompt(s).
     system_list = [
         {
             "text": "You are an expert medical doctor. When the user provides you with an image of their urine test strip, analyze carefully the color of the various indicators on the test and compare it to the testkit reference. Then provide a short medical analysis and lookout for possible infection indicators. Provide your answer in a concise format. Provide your answer in markdown format. Do not analyze images that are not containing a urine test strip. Always end the response with a disclaimer that this is not a medical advice. Please respond in the following language: " + language  
         }
     ]
+   
     # Define a "user" message including both the image and a text prompt.
     with open("uri_test_reference.jpeg", "rb") as f:
         ref_image = f.read()
@@ -83,12 +85,6 @@ def get_LLM_analysis(model_id, refimageb64, imageb64, language):
                 {
                     "text": "You are going to analyze a patient's urine test by confronting a reference image from the test kit instructions with the used test from the patient. The first image shows a urine test reference. You can identify the order of the tested parameters on the test strips and the normal results."
                 },
-                {
-                    "text": "This second image shows the urine test strip from the patient. From this image, identify each parameter by comparing it with the reference image. For each parameter, identify accurately the color of the test result."
-                },
-                {
-                    "text": "Based on the two pictures provided, respond with a three sentence summary of your analysis. Then provide a table with each parameter (rows) in the same order of the test strip. These are the columns that must be included in the table: Parameter name; Normal reference color (describe the color of the reference kit); Test color (describe the color you see in the dypstic test) ; Comment; trafficlight(:red_circle: or :white_check_mark:). After the table, if any parameter is not normal, provide a description and possible causes analysis."
-                }
             ],
         }
     ]
@@ -100,7 +96,8 @@ def get_LLM_analysis(model_id, refimageb64, imageb64, language):
         response = client.converse(
             modelId=model_id,
             messages=message_list,
-            inferenceConfig={"maxTokens": 1000, "temperature": 0.5, "topP": 0.9},
+            #inferenceConfig={"maxTokens": 1000, "temperature": 0.5, "topP": 0.9},
+            #system=system_list
         )  
 
         # Extract and print the response text.
