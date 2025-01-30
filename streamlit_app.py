@@ -130,7 +130,6 @@ st.sidebar.image("uri_test_reference.jpeg")
 
 with open("uri_test_reference.jpeg", "rb") as f:
         ref_image = f.read()
-encoded_ref_image = encode_image(ref_image)
 
 #--upload test strip photo, rotate it, save it
 col1, col2 = st.columns(2)
@@ -156,10 +155,10 @@ if up_image is not None:
 launch_llm = st.button("Analyze")
 if launch_llm: 
     #--open rotated image and encode it
-    with open("img.jpeg", "rb") as f:
-        image = f.read()
+    #with open("img.jpeg", "rb") as f:
+    #    image = f.read()
+    encoded_ref_image = encode_image(ref_image)
     encoded_image = encode_image(image)
-    col2.image(image)
     #--launch llm
     answer=get_LLM_analysis(model_id, encoded_ref_image, encoded_image, output_language)
     st.write(answer)
