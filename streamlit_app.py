@@ -137,21 +137,20 @@ col1, col2 = st.columns(2)
 up_image=st.file_uploader("Upload your photo", type=["jpeg", "png"])
 if up_image is not None:
     img_holder = st.sidebar.image(up_image)
-    st.write("Make sure your photo is aligned in the same way as the reference of the test-kit:")
-    mapping = {"90": "90º :arrows_counterclockwise:", "270": "90º :arrows_clockwise:", "180":"180º"}
-    rotate = st.radio("Rotate photo: ", ("90","270","180"), format_func = lambda x: mapping[x])
-    rot_bt = st.button("Rotate")
-    if rot_bt:
-        rot_image = Image.open(up_image).rotate(int(rotate))
-        col2.image(rot_image)
-        rot_image.save("img.jpeg")
-    else:
-        rot_image = Image.open(up_image)
-        col2.image(rot_image)
-        rot_image.save("img.jpeg")
-
-col1.image(ref_image)
-
+    #st.write("Make sure your photo is aligned in the same way as the reference of the test-kit:")
+    #mapping = {"90": "90º :arrows_counterclockwise:", "270": "90º :arrows_clockwise:", "180":"180º"}
+    #rotate = st.radio("Rotate photo: ", ("90","270","180"), format_func = lambda x: mapping[x])
+    #rot_bt = st.button("Rotate")
+    #if rot_bt:
+    #    rot_image = Image.open(up_image).rotate(int(rotate))
+    #    col2.image(rot_image)
+    #    rot_image.save("img.jpeg")
+    #else:
+    #    rot_image = Image.open(up_image)
+    #    col2.image(rot_image)
+    #    rot_image.save("img.jpeg")
+    col1.image(ref_image)
+    col2.image(up_image)
 
 #--consult llm
 launch_llm = st.button("Analyze")
