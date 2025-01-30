@@ -141,10 +141,8 @@ st.write("Upload a photo of your urine test strip for analysis")
 model_id2 = "us.anthropic.claude-3-5-sonnet-20240620-v1:0" #must use x-region inference??!! --> add the us or eu prefix to the model?
 model_id = "amazon.nova-lite-v1:0"
 st.write("\(note: this app uses the following LLM model: ", model_id, "\)" )
-# st.write(model_id)
 
-# Create a Bedrock Runtime client in the AWS Region you want to use.
-# client = boto3.client("bedrock-runtime", region_name="us-east-1")
+#--Create a Bedrock Runtime client in the AWS Region you want to use.
 client = boto3.client(
     'bedrock-runtime',
     aws_access_key_id=st.secrets["AWS_ACCESS_KEY_ID"],
@@ -152,11 +150,18 @@ client = boto3.client(
     region_name=st.secrets["AWS_REGION"]
 )
 
+#--select user language
 output_language = st.radio("Select your language:", ["Spanish","Italian","English"]) 
 st.write("You selected: ", output_language)
 
+#--display and open test reference image
 st.sidebar.image("uri_test_reference.jpg")
+with open("uri_test_reference.jpg", "rb") as f:
+        ref_image = f.read()
+encoded_ref_image = encode_image(ref_image)
+st.write(encoded_ref_image)
 
+#--upload test strip photo, rotate it, save it
 up_image=st.file_uploader("Upload your photo", type=["jpg","png"])
 if up_image is not None:
     img_holder = st.sidebar.image(up_image)
@@ -168,20 +173,22 @@ if up_image is not None:
         image = Image.open(up_image).rotate(int(rotate))
         img_holder.image(image)
         image.save("img.jpg")
-       
+
+#--consult llm
 launch_llm = st.button("Analyze")
 if launch_llm: 
-     with open("img.jpg", "rb") as f:
+    #--open rotated image and encode it
+    with open("img.jpg", "rb") as f:
         image = f.read()
-        st.sidebar.image(image)
-        encoded_image = encode_image(image)
-        st.write(encoded_image)
-        answer=get_LLM_analysis(encoded_image, output_language)
-        st.write(answer)
+    st.sidebar.image(image)
+    encoded_image = encode_image(image)
+    #--launch llm
+    answer=get_LLM_analysis(encoded_image, output_language)
+    st.write(answer)
 
 
 #-- print legenda of typical dipstick test
-print_legend(output_language)
+#print_legend(output_language)
 
 
 # -- end main--
