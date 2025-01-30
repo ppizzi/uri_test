@@ -102,18 +102,19 @@ def make_payload(encoded_ref_image, encoded_image, language):
     # Configure the inference parameters.
     #inf_params = {"temperature": 0.5, "topP": 0.9}
 
-    payload = {
-        "messages": message_list,
-        "system": system_list
-    }
-  
-    return payload
+    #payload = {
+    #    "messages": message_list,
+    #    "system": system_list
+    #}
+    #return payload
+    return message_list, system_list
 
 
 def get_LLM_analysis(model_id, refimageb64, imageb64, language):
     
-    payload = make_payload(refimageb64, imageb64, language)
-    payload
+    # payload = make_payload(refimageb64, imageb64, language)
+    # payload
+    message_list, system_list = make_payload(refimageb64, imageb64, language)
     # st.write("message ready")
 
     try:
@@ -124,7 +125,7 @@ def get_LLM_analysis(model_id, refimageb64, imageb64, language):
         #)     
         response = client.converse(
             modelId=model_id,
-            messages=payload["messages"],
+            messages=message_list,
        )  
 
         # Extract and print the response text.
