@@ -67,8 +67,8 @@ def get_LLM_analysis(model_id, refimageb64, imageb64, language):
     
     with open("uri_test_reference.jpeg", "rb") as f:
         ref_image = f.read()
-    with open("img.jpeg", "rb") as f:
-        image = f.read()
+    with open("img.jpeg", "rb") as p:
+        image = p.read()
 
     user_message = "tell me something nice my doctor would say"
     conversation = [
@@ -142,7 +142,9 @@ if up_image is not None:
     rot_bt = st.button("Rotate")
     if rot_bt:
         rot_image = Image.open(up_image).rotate(int(rotate))
-        img_holder.image(rot_image)
+        col1, col2 = st.columns(2)
+        col1.image(ref_image)
+        col2.image(rot_image)
         rot_image.save("img.jpeg")
     else:
         rot_image = Image.open(up_image)
@@ -155,7 +157,7 @@ if launch_llm:
     with open("img.jpeg", "rb") as f:
         image = f.read()
     encoded_image = encode_image(image)
-    img_holder.image(image)
+    col2.image(image)
     #--launch llm
     answer=get_LLM_analysis(model_id, encoded_ref_image, encoded_image, output_language)
     st.write(answer)
