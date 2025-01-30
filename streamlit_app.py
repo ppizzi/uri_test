@@ -185,7 +185,7 @@ if launch_llm:
     #--open rotated image and encode it
     with open("img.jpg", "rb") as f:
         image = f.read()
-    st.sidebar.image(image)
+    #st.sidebar.image(image)
     encoded_image = encode_image(image)
     #--launch llm
     answer=get_LLM_analysis(encoded_ref_image, encoded_image, output_language)
