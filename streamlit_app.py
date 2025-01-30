@@ -168,9 +168,7 @@ output_language = st.radio("Select your language:", ["Spanish","Italian","Englis
 st.write("You selected: ", output_language)
 
 #--display and open test reference image
-col1, col2 = st.sidebar.columns(2)
-#st.sidebar.image("uri_test_reference.jpg")
-col1.image("uri_test_reference.jpg")
+st.sidebar.image("uri_test_reference.jpg")
 
 with open("uri_test_reference.jpg", "rb") as f:
         ref_image = f.read()
@@ -179,16 +177,14 @@ encoded_ref_image = encode_image(ref_image)
 #--upload test strip photo, rotate it, save it
 up_image=st.file_uploader("Upload your photo", type=["jpg","png"])
 if up_image is not None:
-    #img_holder = st.sidebar.image(up_image)
-    col2.image(up_image)
+    img_holder = st.image(up_image)
     st.write("Make sure your photo is aligned in the same way as the reference of the test-kit:")
     mapping = {"0":"OK", "90": "90º :arrows_counterclockwise:", "270": "90º :arrows_clockwise:", "180":"180º"}
     rotate = st.radio("Rotate photo: ", ("0","90","270","180"), format_func = lambda x: mapping[x])
     save = st.button("Save")
     if save:
         image = Image.open(up_image).rotate(int(rotate))
-        #img_holder.image(image)
-        col2.image(image)
+        img_holder.image(image)
         image.save("img.jpg")
 
 #--consult llm
@@ -197,8 +193,8 @@ if launch_llm:
     #--open rotated image and encode it
     with open("img.jpg", "rb") as f:
         image = f.read()
-    #st.sidebar.image(image)
     encoded_image = encode_image(image)
+    img_holder.image(image)
     #--launch llm
     answer=get_LLM_analysis(encoded_ref_image, encoded_image, output_language)
     st.write(answer)
