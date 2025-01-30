@@ -84,7 +84,7 @@ def make_payload(encoded_ref_image, encoded_image, language):
                         "format": "jpg",
                         "source": {"bytes": encoded_ref_image},
                     }
-                }
+                },
                 {
                     "text": "This second image shows the urine test strip from the patient. From this image, identify each parameter by comparing it with the reference image. For each parameter, identify accurately the color of the test result."
                 },
@@ -93,7 +93,7 @@ def make_payload(encoded_ref_image, encoded_image, language):
                         "format": "jpg",
                         "source": {"bytes": encoded_image},
                     }
-                } 
+                }, 
                 {
                     "text": "Based on the two pictures provided, respond with a short summary of your analysis. Then provide a table with each parameter (rows) in the same order of the test strip. These are the columns that must be included in the table: Parameter name; Normal reference color; Detected test color; Comment; trafficlight(red/green)."
                 }
