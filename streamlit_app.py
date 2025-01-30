@@ -80,7 +80,7 @@ def get_LLM_analysis(model_id, refimageb64, imageb64, language):
                 },
                 {
                     "image": {
-                        "format": "jpg",
+                        "format": "jpeg",
                         "source": {"bytes": refimageb64},
                     }
                 },
@@ -89,7 +89,7 @@ def get_LLM_analysis(model_id, refimageb64, imageb64, language):
                 },
                 {
                     "image": {
-                        "format": "jpg",
+                        "format": "jpeg",
                         "source": {"bytes": imageb64},
                     }
                 }, 
