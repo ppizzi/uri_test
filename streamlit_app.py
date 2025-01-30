@@ -101,12 +101,11 @@ def make_payload(encoded_ref_image, encoded_image, language):
         }
     ]
     # Configure the inference parameters.
-    inf_params = {"temperature": 0.5, "topP": 0.9}
+    #inf_params = {"temperature": 0.5, "topP": 0.9}
 
     payload = {
         "messages": message_list,
-        "system": system_list,
-        #"inferenceConfig": inf_params,
+        "system": system_list
     }
   
     return payload
