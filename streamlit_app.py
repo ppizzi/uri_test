@@ -160,11 +160,9 @@ st.sidebar.image("uri_test_reference.jpg")
 up_image=st.file_uploader("Upload your photo", type=["jpg","png"])
 if up_image is not None:
     img_holder = st.sidebar.image(up_image)
-    st.write(encode_image(up_image))
     st.write("Make sure your photo is aligned in the same way as the reference of the test-kit:")
     mapping = {"0":"OK", "90": "90º :arrows_counterclockwise:", "270": "90º :arrows_clockwise:", "180":"180º"}
     rotate = st.radio("Rotate photo: ", ("0","90","270","180"), format_func = lambda x: mapping[x])
-    #st.write(rotate)
     save = st.button("Save")
     if save:
         image = Image.open(up_image).rotate(int(rotate))
@@ -175,12 +173,9 @@ launch_llm = st.button("Analyze")
 if launch_llm: 
      with open("img.jpg", "rb") as f:
         image = f.read()
-        st.write(type(image))
-        st.write(type(image)=="bytes")
         st.sidebar.image(image)
-        #st.image(image)
         encoded_image = encode_image(image)
-        #st.write(encoded_image)
+        st.write(encoded_image)
         answer=get_LLM_analysis(encoded_image, output_language)
         st.write(answer)
 
