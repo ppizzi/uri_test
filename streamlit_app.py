@@ -124,7 +124,8 @@ def get_LLM_analysis(model_id, refimageb64, imageb64, language):
         
         response = client.converse(
             modelId=model_id,
-            messages=message_list
+            messages=message_list,
+            inferenceConfig={"maxTokens": 1000, "temperature": 0.5, "topP": 0.9},
         )  
 
         # Extract and print the response text.
