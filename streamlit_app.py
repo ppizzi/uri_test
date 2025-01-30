@@ -34,7 +34,7 @@ def encode_image(image):
 
 def print_legend(language):
     # Start a conversation with the user message.
-    user_message = "List in bullet points the parameters that are typically included in a urine strip test and how to interpret them. Use markdown as formatting language in your response. Please respond in the following language: " + language + ". Finish the response with a line that states the LLM model used."
+    user_message = "List in bullet points the parameters that are typically included in a urine strip test and how to interpret them. Use markdown as formatting language in your response. Please respond in the following language: " + language + ". Finish the response with a line that states the LLM model provider."
     st.write(user_message)
     conversation = [
         {
@@ -66,7 +66,7 @@ def make_payload(encoded_image, language):
     # Define your system prompt(s).
     system_list = [
         {
-            "text": "You are an expert medical doctor. When the user provides you with an image of their urine test strip, analyze carefully the color of the various indicators on the test. Then provide a short medical analysis and lookout for possible infection indicators. Provide your answer in a concise format. Provide your answer in markdown format. Do not analyze images that are not containing a urine test strip. Always end the response with a disclaimer that this is not a medical advice. Finish the response with a line that states the LLM model used. Please respond in the following language: " + language  
+            "text": "You are an expert medical doctor. When the user provides you with an image of their urine test strip, analyze carefully the color of the various indicators on the test. Then provide a short medical analysis and lookout for possible infection indicators. Provide your answer in a concise format. Provide your answer in markdown format. Do not analyze images that are not containing a urine test strip. Always end the response with a disclaimer that this is not a medical advice. Finish the response with a line that states the LLM model provider. Please respond in the following language: " + language  
         }
     ]
     # Define a "user" message including both the image and a text prompt.
