@@ -152,7 +152,7 @@ st.write("Upload a photo of your urine test strip for analysis")
 #--Select model for inference
 # naming conventions: https://docs.aws.amazon.com/bedrock/latest/userguide/models-supported.html
 model_ids = ["us.anthropic.claude-3-5-sonnet-20240620-v1:0", "amazon.nova-lite-v1:0"]
-model_id = model_ids[1] 
+model_id = model_ids[0] 
 st.write("\(note: this app uses the following LLM model: ", model_id, "\)" )
 
 #--Create a Bedrock Runtime client in the AWS Region you want to use.
