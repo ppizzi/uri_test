@@ -128,7 +128,7 @@ def get_LLM_analysis(model_id, refimageb64, imageb64, language):
         #    modelId=model_id,
         #    messages=payload,
         #    inferenceConfig={"temperature": 0.5, "topP": 0.9}
-        )  
+        #)  
 
         # Extract and print the response text.
         model_response = json.loads(response["body"].read())
