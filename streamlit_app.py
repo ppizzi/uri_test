@@ -156,7 +156,10 @@ output_language = st.radio("Select your language:", ["Spanish","Italian","Englis
 st.write("You selected: ", output_language)
 
 #--display and open test reference image
-st.sidebar.image("uri_test_reference.jpg")
+col1, col2 = st.sidebar.columns(2)
+#st.sidebar.image("uri_test_reference.jpg")
+col1 = st.image("uri_test_reference.jpg")
+
 with open("uri_test_reference.jpg", "rb") as f:
         ref_image = f.read()
 encoded_ref_image = encode_image(ref_image)
