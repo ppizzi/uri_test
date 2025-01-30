@@ -63,7 +63,7 @@ def print_legend(language):
     return
 
 
-def make_payload(encoded_ref_image, encoded_image, language):
+def get_LLM_analysis(model_id, refimageb64, imageb64, language):
     # Define your system prompt(s).
     system_list = [
         {
@@ -81,7 +81,7 @@ def make_payload(encoded_ref_image, encoded_image, language):
                 {
                     "image": {
                         "format": "jpg",
-                        "source": {"bytes": encoded_ref_image},
+                        "source": {"bytes": refimageb64},
                     }
                 },
                 {
@@ -90,7 +90,7 @@ def make_payload(encoded_ref_image, encoded_image, language):
                 {
                     "image": {
                         "format": "jpg",
-                        "source": {"bytes": encoded_image},
+                        "source": {"bytes": imageb64},
                     }
                 }, 
                 {
@@ -99,32 +99,25 @@ def make_payload(encoded_ref_image, encoded_image, language):
             ],
         }
     ]
+    
     # Configure the inference parameters.
     #inf_params = {"temperature": 0.5, "topP": 0.9}
 
-    payload = {
-        "messages": message_list,
-        "system": system_list
-    }
-    return payload
-
-
-def get_LLM_analysis(model_id, refimageb64, imageb64, language):
-    
-    payload = make_payload(refimageb64, imageb64, language)
-    # payload
-    # st.write("message ready")
-
     try:
-        # Send the message to the model, using a basic inference configuration.
-        response = client.invoke_model(    
-            modelId=model_id,
-            body=json.dumps(payload)
-        )     
-        #response = client.converse(
+        #payload = {
+        #    "messages": message_list,
+        #    "system": system_list
+        #}
+        ## Send the message to the model, using a basic inference configuration.
+        #response = client.invoke_model(    
         #    modelId=model_id,
-        #    messages=message_list,
-        #)  
+        #    body=json.dumps(payload)
+        #)     
+        
+        response = client.converse(
+            modelId=model_id,
+            messages=message_list
+        )  
 
         # Extract and print the response text.
         model_response = json.loads(response["body"].read())
@@ -151,7 +144,7 @@ st.write("Upload a photo of your urine test strip for analysis")
 #--Select model for inference
 # naming conventions: https://docs.aws.amazon.com/bedrock/latest/userguide/models-supported.html
 model_ids = ["us.anthropic.claude-3-5-sonnet-20240620-v1:0", "amazon.nova-lite-v1:0"]
-model_id = model_ids[1] 
+model_id = model_ids[0] 
 st.write("\(note: this app uses the following LLM model: ", model_id, "\)" )
 
 #--Create a Bedrock Runtime client in the AWS Region you want to use.
