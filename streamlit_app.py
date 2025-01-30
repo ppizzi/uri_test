@@ -68,7 +68,7 @@ def make_payload(encoded_ref_image, encoded_image, language):
     # Define your system prompt(s).
     system_list = [
         {
-            "text": "You are an expert medical doctor. When the user provides you with an image of their urine test strip, analyze carefully the color of the various indicators on the test. Then provide a short medical analysis and lookout for possible infection indicators. Provide your answer in a concise format. Provide your answer in markdown format. Do not analyze images that are not containing a urine test strip. Always end the response with a disclaimer that this is not a medical advice. Finish the response with a line that states the LLM model provider. Please respond in the following language: " + language  
+            "text": "You are an expert medical doctor. When the user provides you with an image of their urine test strip, analyze carefully the color of the various indicators on the test and compare it to the testkit reference. Then provide a short medical analysis and lookout for possible infection indicators. Provide your answer in a concise format. Provide your answer in markdown format. Do not analyze images that are not containing a urine test strip. Always end the response with a disclaimer that this is not a medical advice. Finish the response with a line that states the LLM model provider. Please respond in the following language: " + language  
         }
     ]
     # Define a "user" message including both the image and a text prompt.
@@ -77,13 +77,25 @@ def make_payload(encoded_ref_image, encoded_image, language):
             "role": "user",
             "content": [
                 {
+                    "text": "You are going to analyze a patient's urine test by confronting a reference image from the test kit instructions with the used test from the patient. The first image shows a urine test reference. You can identify the order of the tested parameters on the test strips and the normal results."
+                },
+                {
+                    "image": {
+                        "format": "jpg",
+                        "source": {"bytes": encoded_ref_image},
+                    }
+                }
+                {
+                    "text": "This second image shows the urine test strip from the patient. From this image, identify each parameter by comparing it with the reference image. For each parameter, identify accurately the color of the test result."
+                },
+                {
                     "image": {
                         "format": "jpg",
                         "source": {"bytes": encoded_image},
                     }
-                },
+                } 
                 {
-                    "text": "Analyze the image provided by the user, pay close attention to the colors of the indicators on the test strip and identify them precisely. Provide a short summary of your analysis first. Then provide a table where the rows are the test parameters in the same order as the picture provided, and the columns are the following: parameter name; detected color; result of the analysis; details (explain your analysis); indicator (green/yellow/red). For parameters that are out of normal range, provide a short analysis after the table."
+                    "text": "Based on the two pictures provided, respond with a short summary of your analysis. Then provide a table with each parameter (rows) in the same order of the test strip. These are the columns that must be included in the table: Parameter name; Normal reference color; Detected test color; Comment; trafficlight(red/green)."
                 }
             ],
         }
