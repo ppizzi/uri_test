@@ -95,7 +95,7 @@ def make_payload(encoded_ref_image, encoded_image, language):
                     }
                 }, 
                 {
-                    "text": "Based on the two pictures provided, respond with a three sentence summary of your analysis. Then provide a table with each parameter (rows) in the same order of the test strip. These are the columns that must be included in the table: Parameter name; Normal reference color; Detected test color; Comment; trafficlight(:red_circle: or :white_check_mark:). After the table, if any parameter is not normal, provide a description and possible causes analysis."
+                    "text": "Based on the two pictures provided, respond with a three sentence summary of your analysis. Then provide a table with each parameter (rows) in the same order of the test strip. These are the columns that must be included in the table: Parameter name; Normal reference color (describe the color of the reference kit); Test color (describe the color you see in the dypstic test) ; Comment; trafficlight(:red_circle: or :white_check_mark:). After the table, if any parameter is not normal, provide a description and possible causes analysis."
                 }
             ],
         }
