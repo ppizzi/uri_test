@@ -160,14 +160,14 @@ output_language = st.radio("Select your language:", ["Spanish","Italian","Englis
 st.write("You selected: ", output_language)
 
 #--display and open test reference image
-st.sidebar.image("uri_test_reference.jpg")
+st.sidebar.image("uri_test_reference.jpeg")
 
 with open("uri_test_reference.jpeg", "rb") as f:
         ref_image = f.read()
 encoded_ref_image = encode_image(ref_image)
 
 #--upload test strip photo, rotate it, save it
-up_image=st.file_uploader("Upload your photo", type=["jpg","png"])
+up_image=st.file_uploader("Upload your photo", type=["jpeg", "png"])
 if up_image is not None:
     img_holder = st.image(up_image)
     st.write("Make sure your photo is aligned in the same way as the reference of the test-kit:")
