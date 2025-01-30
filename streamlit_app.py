@@ -82,7 +82,7 @@ def get_LLM_analysis(model_id, refimageb64, imageb64, language):
                     "image": {
                         "format": "jpeg",
                         #"source": {"bytes": refimageb64},
-                        "source": {"bytes": Image.open("uri_test_reference.jpeg")},
+                        "source": {"bytes": open("uri_test_reference.jpeg")},
                     }
                 },
                 {
