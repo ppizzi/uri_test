@@ -162,7 +162,7 @@ st.write("You selected: ", output_language)
 #--display and open test reference image
 st.sidebar.image("uri_test_reference.jpg")
 
-with open("uri_test_reference.jpg", "rb") as f:
+with open("uri_test_reference.jpeg", "rb") as f:
         ref_image = f.read()
 encoded_ref_image = encode_image(ref_image)
 
@@ -177,16 +177,16 @@ if up_image is not None:
     if rot_bt:
         rot_image = Image.open(up_image).rotate(int(rotate))
         img_holder.image(rot_image)
-        rot_image.save("img.jpg")
+        rot_image.save("img.jpeg")
     else:
         rot_image = Image.open(up_image)
-        rot_image.save("img.jpg")
+        rot_image.save("img.jpeg")
 
 #--consult llm
 launch_llm = st.button("Analyze")
 if launch_llm: 
     #--open rotated image and encode it
-    with open("img.jpg", "rb") as f:
+    with open("img.jpeg", "rb") as f:
         image = f.read()
     encoded_image = encode_image(image)
     img_holder.image(image)
