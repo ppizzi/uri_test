@@ -133,6 +133,7 @@ with open("uri_test_reference.jpeg", "rb") as f:
 encoded_ref_image = encode_image(ref_image)
 
 #--upload test strip photo, rotate it, save it
+col1, col2 = st.columns(2)
 up_image=st.file_uploader("Upload your photo", type=["jpeg", "png"])
 if up_image is not None:
     img_holder = st.image(up_image)
@@ -142,7 +143,6 @@ if up_image is not None:
     rot_bt = st.button("Rotate")
     if rot_bt:
         rot_image = Image.open(up_image).rotate(int(rotate))
-        col1, col2 = st.columns(2)
         col1.image(ref_image)
         col2.image(rot_image)
         rot_image.save("img.jpeg")
