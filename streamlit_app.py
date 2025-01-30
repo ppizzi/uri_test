@@ -71,6 +71,10 @@ def get_LLM_analysis(model_id, refimageb64, imageb64, language):
         }
     ]
     # Define a "user" message including both the image and a text prompt.
+    with open("uri_test_reference.jpeg", "rb") as f:
+        ref_image = f.read()
+
+    
     message_list = [
         {
             "role": "user",
@@ -82,7 +86,7 @@ def get_LLM_analysis(model_id, refimageb64, imageb64, language):
                     "image": {
                         "format": "jpeg",
                         #"source": {"bytes": refimageb64},
-                        "source": {"bytes": open("uri_test_reference.jpeg")},
+                        "source": {"bytes": ref_image},
                     }
                 },
                 {
