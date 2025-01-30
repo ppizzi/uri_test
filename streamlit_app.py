@@ -157,7 +157,7 @@ st.sidebar.image("uri_test_reference.jpg")
 
 up_image=st.file_uploader("Upload your photo", type=["jpg","png"])
 if up_image is not None:
-    #st.write(type(up_image))
+    st.write(type(up_image))
     img_holder = st.sidebar.image(up_image)
     st.write("Make sure your photo is aligned in the same way as the reference of the test-kit:")
     mapping = {"0":"OK", "90": "90º :arrows_counterclockwise:", "270": "90º :arrows_clockwise:", "180":"180º"}
@@ -173,6 +173,7 @@ launch_llm = st.button("Analyze")
 if launch_llm: 
      with open("img.jpg", "rb") as f:
         image = f.read()
+        st.write(type(image))
         st.sidebar.image(image)
         #st.image(image)
         encoded_image = encode_image(image)
