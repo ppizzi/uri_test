@@ -34,8 +34,8 @@ def encode_image(image):
 
 def print_legend(language):
     # Start a conversation with the user message.
-    user_message = "List in bullet points the parameters that are typically included in a urine strip test and how to interpret them. Use markdown as formatting language in your response. Please respond in the following language: " + language
-    # st.write(user_message)
+    user_message = "List in bullet points the parameters that are typically included in a urine strip test and how to interpret them. Use markdown as formatting language in your response. Please respond in the following language: " + language + ". Finish the response with a line that states the LLM model version used."
+    st.write(user_message)
     conversation = [
         {
         "role": "user",
@@ -174,7 +174,7 @@ if launch_llm:
      with open("img.jpg", "rb") as f:
         image = f.read()
         st.sidebar.image(image)
-        st.image(image)
+        #st.image(image)
         encoded_image = encode_image(image)
         #st.write(encoded_image)
         answer=get_LLM_analysis(encoded_image, output_language)
