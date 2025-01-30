@@ -40,8 +40,10 @@ def print_legend(language):
     st.write(user_message)
     conversation = [
         {
-        "role": "user",
-        "content": [{"text": user_message}],
+            "role": "user",
+            "content": [
+                {"text": user_message},
+            ],
         }
     ]
 
@@ -72,11 +74,13 @@ def get_LLM_analysis(model_id, refimageb64, imageb64, language):
 
     user_message = "tell me something nice my doctor would say"
     conversation = [
-            {
+        {
             "role": "user",
-            "content": [{"text": user_message}],
-            }
-        ]
+            "content": [
+                {"text": user_message}
+            ],
+        }
+    ]
 
     try:
         # Send the message to the model, using a basic inference configuration.
