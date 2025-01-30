@@ -93,9 +93,10 @@ def get_LLM_analysis(model_id, refimageb64, imageb64, language):
 
 
     try:
+        conversation = [{"role":"user", "content":[{"text":"tell me something nice"}] }]
         response = client.converse(
             modelId=model_id,
-            [{"role":"user", "content":[{"text":"tell me something nice"}] }],
+            messages=conversation,
             #inferenceConfig={"maxTokens": 1000, "temperature": 0.5, "topP": 0.9},
             #system=system_list
         )  
