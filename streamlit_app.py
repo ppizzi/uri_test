@@ -182,7 +182,7 @@ if launch_llm:
 
 
 #-- print legenda of typical dipstick test
-# print_legend(output_language)
+print_legend(output_language)
 
 
 # -- end main--
