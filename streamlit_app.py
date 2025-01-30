@@ -157,8 +157,10 @@ if launch_llm:
     #--open rotated image and encode it
     #with open("img.jpeg", "rb") as f:
     #    image = f.read()
+    #    encoded_image = encode_image(image)
+
     encoded_ref_image = encode_image(ref_image)
-    encoded_image = encode_image(image)
+    encoded_image = encode_image(up_image)
     #--launch llm
     answer=get_LLM_analysis(model_id, encoded_ref_image, encoded_image, output_language)
     st.write(answer)
