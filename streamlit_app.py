@@ -5,6 +5,9 @@
 # https://github.com/awsdocs/aws-doc-sdk-examples/blob/main/python/example_code/bedrock-runtime/models/anthropic_claude/converse.py#L4
 # https://docs.aws.amazon.com/nova/latest/userguide/modalities-image-examples.html
 # https://discuss.streamlit.io/t/unique-key-for-every-items-in-radio-button/20654/4
+# https://stackoverflow.com/questions/3715493/encoding-an-image-file-with-base64
+# https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_ImageSource.html
+# https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Message.html
 
 import streamlit as st
 import json
@@ -130,7 +133,7 @@ st.write("Upload a photo of your urine test strip for analysis")
 
 # Select model for inference
 # naming conventions: https://docs.aws.amazon.com/bedrock/latest/userguide/models-supported.html
-# model_id = "anthropic.claude-3-5-haiku-20241022-v1:0" #must use x-region inference??!!
+# model_id = "us.anthropic.claude-3-5-sonnet-20240620-v1:0" #must use x-region inference??!! --> add the us or eu prefix to the model?
 model_id = "amazon.nova-lite-v1:0"
 st.write("\(note: this app uses the following LLM model: ", model_id, "\)" )
 # st.write(model_id)
