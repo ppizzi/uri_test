@@ -48,7 +48,7 @@ def print_legend(language):
     try:
         # Send the message to the model, using a basic inference configuration.
         response = client.converse(
-            modelId=model_id2,
+            modelId=model_id,
             messages=conversation,
             inferenceConfig={"temperature": 0.5, "topP": 0.9},
         )
@@ -115,16 +115,16 @@ def make_payload(encoded_ref_image, encoded_image, language):
 def get_LLM_analysis(model_id, refimageb64, imageb64, language):
     
     payload = make_payload(refimageb64, imageb64, language)
-    # payload
+    payload
     # st.write("message ready")
 
     try:
         # Send the message to the model, using a basic inference configuration.
-        # response = client.converse(
-        response = client.invoke_model(    
+        response = client.converse(
+        #response = client.invoke_model(    
             modelId=model_id,
-            #messages=payload,
-            body=json.dumps(payload)
+            messages=payload,
+            #body=json.dumps(payload)
         )            
 
         # Extract and print the response text.
