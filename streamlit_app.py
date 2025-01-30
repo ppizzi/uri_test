@@ -25,8 +25,10 @@ from botocore.exceptions import ClientError
 
 def encode_image(image):
     #st.write("converting image to b64")
-    #encoded_image = base64.b64encode(image.read()).decode("utf-8") #< works with uploaded file from st.upload_file, but not with an image from PIL or from os.open
-    encoded_image = base64.b64encode(image).decode("utf-8")
+    try:
+        encoded_image = base64.b64encode(image.read()).decode("utf-8") #< works with uploaded file from st.upload_file, but not with an image from PIL or from os.open
+    except:
+        encoded_image = base64.b64encode(image).decode("utf-8")
     #encoded_image
     #st.write("converted")
     
@@ -157,9 +159,8 @@ st.sidebar.image("uri_test_reference.jpg")
 
 up_image=st.file_uploader("Upload your photo", type=["jpg","png"])
 if up_image is not None:
-    st.write(type(up_image))
-    st.write(type(up_image)=="UploadedFile")
     img_holder = st.sidebar.image(up_image)
+    st.write(encode_image(up_image))
     st.write("Make sure your photo is aligned in the same way as the reference of the test-kit:")
     mapping = {"0":"OK", "90": "90º :arrows_counterclockwise:", "270": "90º :arrows_clockwise:", "180":"180º"}
     rotate = st.radio("Rotate photo: ", ("0","90","270","180"), format_func = lambda x: mapping[x])
